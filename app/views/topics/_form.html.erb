@@ -1,0 +1,9 @@
+<%= form_for @topic do |n| %>
+	<%= n.label :title, 'Title : ' %>
+	<%= n.text_field :title %>
+
+	<%= n.label :content, 'Content : ' %>
+	<%= n.text_area :content %>
+
+	<%= n.submit %>
+<% end %>	
