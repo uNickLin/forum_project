@@ -14,6 +14,8 @@
 			<td><%= link_to t.title, topic_path(t) %></td>
 			<td><%= t.created_at %></td>
 			<td><%= link_to 'EDIT', edit_topic_path(t) %></td>
+			<td><%= link_to 'DEL', topic_path(t), method: :delete, data: {
+				confirm: 'Are you sure ?'	} %></td>
 		</tr>
 	<% end %>
 </table>
