@@ -1,0 +1,13 @@
+<h3>New Topic</h3>
+
+<%= form_for @topic do |n| %>
+	<%= n.label :title, 'Title : ' %>
+	<%= n.text_field :title %>
+
+	<%= n.label :content, 'Content : ' %>
+	<%= n.text_area :content %>
+
+	<%= n.submit 'Create' %>
+<% end %>	
+
+<%= link_to 'Cancel', topics_path %>
