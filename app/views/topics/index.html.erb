@@ -13,6 +13,7 @@
 			<td>#</td>
 			<td><%= link_to t.title, topic_path(t) %></td>
 			<td><%= t.created_at %></td>
+			<td><%= link_to 'EDIT', edit_topic_path(t) %></td>
 		</tr>
 	<% end %>
 </table>
