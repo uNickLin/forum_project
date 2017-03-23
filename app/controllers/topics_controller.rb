@@ -4,8 +4,7 @@ class TopicsController < ApplicationController
 	before_action :find_topic, except: [:index, :new, :create]
 
 	def index
-		@topics = Topic.all
-		@topics = Topic.page(params[:page]).per(10)
+		@topics = Topic.order("created_at DESC").page(params[:page]).per(10)
 		
 	end
 

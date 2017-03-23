@@ -2,7 +2,9 @@
 
 <%= link_to 'New topic', new_topic_path , class: "btn btn-success" %><br>
 
-<%= paginate @topics %>
+<div class="paginate text-center">
+	<%= paginate @topics %>
+</div>
 
 <table class="table table-hover">
 	<tr>
@@ -16,11 +18,13 @@
 		<tr>
 			<td>#</td>
 			<td><%= link_to t.title, topic_path(t) %></td>
-			<td><%= t.created_at %></td>
+			<td><%= t.created_at.to_date %></td>
 			<td><%= t.user.email %></td>
-			<td><%= link_to 'EDIT', edit_topic_path(t), class: "btn btn-primary" %></td>
-			<td><%= link_to 'DEL', topic_path(t), class: "btn btn-danger", method: :delete, data: {
-				confirm: 'Are you sure ?'	} %></td>
+			<td>
+				<%= link_to 'EDIT', edit_topic_path(t), class: "btn btn-primary" %>
+				<%= link_to 'DEL', topic_path(t), class: "btn btn-danger", method: :delete, data: {
+				confirm: 'Are you sure ?'	} %>		
+			</td>
 		</tr>
 	<% end %>
 </table>

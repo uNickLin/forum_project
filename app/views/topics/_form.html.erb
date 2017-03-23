@@ -7,6 +7,7 @@
 	  <%= n.input :content, input_html: { class: "form-control"} %>
 
 	</div>
-	<%= n.submit %>
+	<%= n.submit 'Confirm', class: "btn btn-primary" %>
+	<%= link_to 'Cancel', topics_path, class: "btn btn-default" %>
 
 <% end %>	
