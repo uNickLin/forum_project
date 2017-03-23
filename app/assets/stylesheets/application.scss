@@ -16,3 +16,33 @@
 
 @import "bootstrap-sprockets";
 @import "bootstrap";
+
+*{
+	// border: solid 1px;
+}
+
+body, html{
+	background-color: #333;
+	height: 100%;
+}
+
+ul{
+	list-style-type: none;
+	margin: 0;
+	padding-left: 0;
+}
+
+.form-group li{
+	margin: 10px;
+}
+
+.navbar{
+	background-color: #FFC857;
+}
+
+.container-fluid{
+	width: 800px;
+	height: 100%;
+	background-color: #EEEFEA;
+
+}

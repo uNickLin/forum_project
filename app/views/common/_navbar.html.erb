@@ -1,9 +1,8 @@
-<!-- <div class="container-fluid"> -->
-  <nav class="navbar navbar-inverse">
+  <nav class="navbar navbar-default">
     <div class="navbar-header">
       <a class="navbar-brand" href="">My Forum</a>
     </div>
-    <ul class="nav navbar-nav">
+    <ul class="nav navbar-nav navbar-right">
     	<% if current_user %>
 		    <li><%= link_to('登出', destroy_user_session_path, :method => :delete, class: "btn btn-danger") %></li>
 		    <li><%= link_to('修改密碼', edit_registration_path(:user), class: "btn btn-primary") %></li>
@@ -13,4 +12,3 @@
 		  <% end %>
     </ul>
   </nav>
-<!-- </div> -->

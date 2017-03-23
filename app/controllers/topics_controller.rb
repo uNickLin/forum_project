@@ -18,6 +18,7 @@ class TopicsController < ApplicationController
 		@topic.user = current_user
 		if @topic.save		
 			redirect_to topics_path
+			flash[:notice] = "新增成功！"
 		else
 			render :new
 		end
@@ -35,6 +36,7 @@ class TopicsController < ApplicationController
 	def update
 		if @topic.update(topic_params)
 			redirect_to topic_path(@topic)
+			flash[:warning] = "更新成功！"
 		else
 			render :edit
 		end
@@ -45,7 +47,7 @@ class TopicsController < ApplicationController
 		@topic.destroy
 
 		redirect_to topics_path
-		
+		flash[:alert] = "刪除成功！"
 	end
 
 

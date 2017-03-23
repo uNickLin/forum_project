@@ -11,8 +11,7 @@
   <body>
   	<div class="container-fluid">
 	  	<%= render 'common/navbar' %>
-        <p class="notice"><%= notice %></p>
-        <p class="alert"><%= alert %></p>
+      <%= render "common/flashes" %>
 	    <%= yield %>
     </div>
   </body>

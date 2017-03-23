@@ -8,4 +8,5 @@
 	<%= @topic.content %>	
 </p>	
 
-<%= link_to 'Back', topics_path %>
+<%= link_to 'EDIT', edit_topic_path(@topic), class: "btn btn-primary" %>
+<%= link_to 'Back', topics_path, class: "btn btn-default" %>
