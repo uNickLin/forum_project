@@ -2,7 +2,7 @@
 	<%= n.label :title, 'Title : ' %>
 	<%= n.text_field :title %>
 
-	<%= n.collection_select(:category_id, Category.all, :id, :name) %>
+	<%= n.collection_select(:category_id, Category.all, :id, :name, prompt: "請選擇分類") %>
 
 	<%= n.label :content, 'Content : ' %>
 	<%= n.text_area :content %>
