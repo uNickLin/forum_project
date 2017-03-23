@@ -1,22 +1,24 @@
 <h1>Welcome to forum !</h1>
 
-<%= link_to 'New topic', new_topic_path %><br>
+<%= link_to 'New topic', new_topic_path , class: "btn btn-success" %><br>
 
 <%= paginate @topics %>
 
-<table>
+<table class="table table-hover">
 	<tr>
 		<th>#</th>
 		<th>Title</th>
 		<th>Create at</th>
+		<th></th>
+		<th></th>
 	</tr>
 	<% @topics.each do |t|%>	
 		<tr>
 			<td>#</td>
 			<td><%= link_to t.title, topic_path(t) %></td>
 			<td><%= t.created_at %></td>
-			<td><%= link_to 'EDIT', edit_topic_path(t) %></td>
-			<td><%= link_to 'DEL', topic_path(t), method: :delete, data: {
+			<td><%= link_to 'EDIT', edit_topic_path(t), class: "btn btn-primary" %></td>
+			<td><%= link_to 'DEL', topic_path(t), class: "btn btn-danger", method: :delete, data: {
 				confirm: 'Are you sure ?'	} %></td>
 		</tr>
 	<% end %>
