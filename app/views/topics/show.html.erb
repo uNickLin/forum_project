@@ -1,6 +1,11 @@
-<h3><%= @topic.title %></h3>
+<h1><%= @topic.title %></h1>
 
-<%= @topic.title %>
-<%= @topic.content %>
+<h3>
+	類別 ： <%= @topic.category.name %>
+</h3>
+
+<p>
+	<%= @topic.content %>	
+</p>	
 
 <%= link_to 'Back', topics_path %>

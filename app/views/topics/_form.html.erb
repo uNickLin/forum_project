@@ -2,6 +2,8 @@
 	<%= n.label :title, 'Title : ' %>
 	<%= n.text_field :title %>
 
+	<%= n.collection_select(:category_id, Category.all, :id, :name) %>
+
 	<%= n.label :content, 'Content : ' %>
 	<%= n.text_area :content %>
 

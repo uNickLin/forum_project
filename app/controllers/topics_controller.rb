@@ -12,9 +12,11 @@ class TopicsController < ApplicationController
 
 	def create
 		@topic = Topic.new(topic_params)
-		@topic.save
-		
-		redirect_to topics_path
+		if @topic.save		
+			redirect_to topics_path
+		else
+			render :new
+		end
 
 	end
 
@@ -49,7 +51,7 @@ class TopicsController < ApplicationController
 	private
 
 	def topic_params
-		params.require(:topic).permit(:title, :content)
+		params.require(:topic).permit(:title, :content, :category_id)
 		
 	end
 
