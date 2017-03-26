@@ -5,18 +5,18 @@ class TopicsController < ApplicationController
 
 	def index
 		@topics = Topic.order("created_at DESC").page(params[:page]).per(10)
-		
+
 	end
 
 	def new
 		@topic = Topic.new
-		
+
 	end
 
 	def create
 		@topic = Topic.new(topic_params)
 		@topic.user = current_user
-		if @topic.save		
+		if @topic.save
 			redirect_to topics_path
 			flash[:notice] = "新增成功！"
 		else
@@ -26,11 +26,13 @@ class TopicsController < ApplicationController
 	end
 
 	def show
-		
+		@comment = Comment.new
+		@comments = Comment.all
+
 	end
 
 	def edit
-		
+
 	end
 
 	def update
@@ -40,7 +42,7 @@ class TopicsController < ApplicationController
 		else
 			render :edit
 		end
-		
+
 	end
 
 	def destroy
@@ -50,13 +52,26 @@ class TopicsController < ApplicationController
 		flash[:alert] = "刪除成功！"
 	end
 
+	def comments
+		@comment = @topic.comments.new(comment_params)
+		@comment.user = current_user
+		@comment.save
+
+		redirect_to topic_path(@topic)
+
+	end
+
 
 
 	private
 
 	def topic_params
 		params.require(:topic).permit(:title, :content, :category_id, :user_id)
-		
+
+	end
+
+	def comment_params
+		params.require(:comment).permit(:message, :topic_id, :user_id)
 	end
 
 	def find_topic

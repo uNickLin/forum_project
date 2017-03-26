@@ -1,12 +1,30 @@
 <h1><%= @topic.title %></h1>
 
 <h3>
-	類別 ： <%= @topic.category.name %>
+	類別 ： 【<%= @topic.category.name %>】
 </h3>
 
 <p>
-	<%= @topic.content %>	
-</p>	
+	內文 ： <%= @topic.content %>
+</p>
 
 <%= link_to 'EDIT', edit_topic_path(@topic), class: "btn btn-primary" %>
 <%= link_to 'Back', topics_path, class: "btn btn-default" %>
+
+<hr>
+
+<ul>
+  <% @comments.each do |m| %>
+  <li>
+    <h4><%= m.user.email %></h4>
+    <p><%= m.message %></p>
+  </li>
+  <% end %>
+</ul>
+
+<%= simple_form_for @comment, url:comments_topic_path(@topic)  do |n| %>
+  <div class="form-group">
+    <%= n.input :message, input_html: { class: "form-control"} %>
+  </div>
+  <%= n.submit %>
+<% end %>
