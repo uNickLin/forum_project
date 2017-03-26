@@ -4,9 +4,13 @@
 	類別 ： 【<%= @topic.category.name %>】
 </h3>
 
-<p>
+<h4>
+  作者 ： <%= @topic.user.email %>
+</h4>
+
+<h5>
 	內文 ： <%= @topic.content %>
-</p>
+</h5>
 
 <%= link_to 'EDIT', edit_topic_path(@topic), class: "btn btn-primary" %>
 <%= link_to 'Back', topics_path, class: "btn btn-default" %>
@@ -17,6 +21,7 @@
   <% @comments.each do |m| %>
   <li>
     <h4><%= m.user.email %></h4>
+    <span class="pull-right"><%= m.created_at %></span>
     <p><%= m.message %></p>
   </li>
   <% end %>

@@ -8,22 +8,23 @@
 
 <table class="table table-hover">
 	<tr>
-		<th>Category</th>
-		<th>Title</th>
-		<th>Create at</th>
-		<th>Creator</th>
+		<th>分類</th>
+		<th>標題</th>
+		<th>建立日期</th>
+		<th>作者</th>
 		<th></th>
 	</tr>
-	<% @topics.each do |t|%>	
+	<% @topics.each do |t|%>
 		<tr>
 			<td>【<%= t.category.name %>】</td>
 			<td><%= link_to t.title, topic_path(t) %></td>
 			<td><%= t.created_at.to_date %></td>
 			<td><%= t.user.email %></td>
 			<td>
-				<%= link_to 'EDIT', edit_topic_path(t), class: "btn btn-primary" %>
-				<%= link_to 'DEL', topic_path(t), class: "btn btn-danger", method: :delete, data: {
-				confirm: 'Are you sure ?'	} %>		
+				<% if current_user && current_user.is_creator?(t) %>
+					<%= link_to 'EDIT', edit_topic_path(t), class: "btn btn-primary" %>
+					<%= link_to 'DEL', topic_path(t), class: "btn btn-danger", method: :delete, data: {confirm: 'Are you sure ?'} %>
+				<% end %>
 			</td>
 		</tr>
 	<% end %>
