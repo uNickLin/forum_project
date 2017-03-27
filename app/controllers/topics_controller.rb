@@ -4,7 +4,15 @@ class TopicsController < ApplicationController
 	before_action :find_topic, except: [:index, :new, :create]
 
 	def index
-		@topics = Topic.order("created_at DESC").page(params[:page]).per(10)
+		category = Category.find_by(name: params[:category]) if params[:category]
+
+		@topics = if params[:keyword]
+                Topic.where( [ "title like ?", "%#{params[:keyword]}%" ] ).page(params[:page]).per(10)
+             	elsif category
+              	category.topics.order("created_at DESC").page(params[:page]).per(10)
+              else
+                Topic.order("created_at DESC").page(params[:page]).per(10)
+              end
 
 	end
 
