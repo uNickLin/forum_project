@@ -21,7 +21,10 @@
   <% @topic.comments.each do |m| %>
   <li>
     <h4><%= m.user.email %></h4>
-    <span class="pull-right"><%= m.created_at %></span>
+    <span class="pull-right">
+      <%= m.created_at.strftime("%b %d. %Y") %>,
+      <%= m.created_at.strftime("%H:%M:%S") %>
+    </span>
     <p><%= m.message %></p>
   </li>
   <% end %>
