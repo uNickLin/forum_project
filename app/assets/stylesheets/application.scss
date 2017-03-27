@@ -21,6 +21,7 @@ $color_powder_white: #EEEFEA;
 $color_deep_brown: #453C38;
 $color_light_brown: #6A5C55;
 $color_orange: #f0ad4e;
+$color_skin : #F7D098;
 
 
 *{
@@ -77,9 +78,30 @@ a:hover{
 	margin: 0 auto;
 }
 
+.profile_card{
+	width: 400px;
+	height: 400px;
+	background-color: $color_skin;
+	border-radius: 15px;
+	padding: 30px;
+	margin: 20px auto;
+	box-shadow: 5px 5px 5px rgba(0,0,0,.5);
+	transition: .5s;
+}
 
+.profile_card:hover{
+	transform: translate(-5px, -5px);
+	box-shadow: 5px 5px 10px rgba(0,0,0,.8);
+}
 
+.profile_card .photo{
+	width: 100px;
+	height: 100px;
+}
 
+.profile_card table{
+	width: 100%;
+}
 
 
 

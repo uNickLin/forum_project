@@ -1,30 +1,34 @@
-<h1>My profile</h1>
+<h1 class="text-center">My profile</h1>
 
 <hr>
 
-<%= link_to 'EDIT', edit_user_registration_path, class: 'btn btn-primary' %>
+<div class="profile_card">
+  <div class="photo">
 
-<table>
-  <tr>
-    <th>First name : </th>
-    <td></td>
-    <td><%= current_user.first_name %></td>
-  </tr>
-  <tr>
-    <th>Last name : </th>
-    <td></td>
-    <td><%= current_user.last_name %></td>
-  </tr>
-  <tr>
-    <th>Nick name : </th>
-    <td></td>
-    <td><%= current_user.nickname %></td>
-  </tr>
-  <tr>
-    <th>Email : </th>
-    <td></td>
-    <td><%= current_user.email %></td>
-  </tr>
-</table>
-
-<%= link_to 'Back', topics_path, class: 'btn btn-default' %>
+  </div>
+  <hr>
+  <table class="profile_info table table-striped"">
+    <tr>
+      <th>First name : </th>
+      <td></td>
+      <td><%= current_user.first_name %></td>
+    </tr>
+    <tr>
+      <th>Last name : </th>
+      <td></td>
+      <td><%= current_user.last_name %></td>
+    </tr>
+    <tr>
+      <th>Nick name : </th>
+      <td></td>
+      <td><%= current_user.nickname %></td>
+    </tr>
+    <tr>
+      <th>Email : </th>
+      <td></td>
+      <td><%= current_user.email %></td>
+    </tr>
+  </table>
+  <%= link_to 'EDIT', edit_user_registration_path, class: 'btn btn-primary' %>
+  <%= link_to 'Back', topics_path, class: 'btn btn-default' %>
+</div>
