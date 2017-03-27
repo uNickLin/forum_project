@@ -20,7 +20,7 @@
 $color_powder_white: #EEEFEA;
 $color_deep_brown: #453C38;
 $color_light_brown: #6A5C55;
-$color_orange: #F66E00;
+$color_orange: #f0ad4e;
 
 
 *{
@@ -51,7 +51,7 @@ a:hover{
 }
 
 .navbar{
-	background-color: #f0ad4e;
+	background-color: $color_orange;
 	margin: -10px -25px 0 -25px;
 	display: flex;
 }
@@ -66,5 +66,20 @@ a:hover{
 	background-color: $color_powder_white;
 	box-shadow: 0px 0px 30px rgba(white,.5);
 	padding: 10px 25px;
-
 }
+
+.comments_count{
+	width: 20px;
+	height: 20px;
+	border-radius: 50%;
+	background-color: $color_orange;
+	color: $color_powder_white;
+	margin: 0 auto;
+}
+
+
+
+
+
+
+

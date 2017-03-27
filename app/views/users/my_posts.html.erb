@@ -1,0 +1,47 @@
+<h1>My posts</h1>
+<hr>
+
+<table class="table table-hover text-center">
+  <thead>
+    <tr>
+      <th class="text-center">分類</th>
+      <th class="text-center">標題</th>
+      <th class="text-center">
+        留言數
+        <!-- Sorting guide => http://railscasts.com/episodes/228-sortable-table-columns?view=asciicast -->
+      </th>
+      <th class="text-center">建立日期</th>
+      <th class="text-center">最新回覆</th>
+      <th class="text-center"></th>
+    </tr>
+  </thead>
+  <% @my_posts.each do |t|%>
+    <tr>
+      <td>【<%= t.category.name %>】</td>
+      <td><%= link_to t.title, topic_path(t) %></td>
+      <td>
+        <div class="comments_count"><%= t.comments.count %></div>
+      </td>
+      <td>
+        <%= t.created_at.strftime("%b %d. %Y") %><br>
+        <%= t.created_at.strftime("%H:%M:%S") %>
+      </td>
+      <td>
+        <% if(t.comments.any?) %>
+          <%= t.comments.last.created_at.strftime("%b %d. %Y") %><br>
+          <%= t.comments.last.created_at.strftime("%H:%M:%S") %>
+        <% else %>
+          -
+        <% end %>
+      </td>
+      <td>
+        <% if current_user && current_user.is_creator?(t) %>
+          <%= link_to 'EDIT', edit_topic_path(t), class: "btn btn-primary" %>
+          <%= link_to 'DEL', topic_path(t), class: "btn btn-danger", method: :delete, data: {confirm: 'Are you sure ?'} %>
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
+</table>
+
+<%= link_to 'BACK', topics_path, class: 'btn btn-default' %>

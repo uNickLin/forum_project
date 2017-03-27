@@ -7,7 +7,11 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :users
+  resources :users do
+    collection do
+      get :my_posts
+    end
+  end
 
   root "topics#index"
 end

@@ -4,14 +4,15 @@
   <%= form_tag topics_path, method: :get do %>
     <%= text_field_tag "keyword" %>
     <%= submit_tag "Search", class: "btn btn-default" %>
+    <%= link_to 'Cancel Search', topics_path, class: 'btn btn-warning' %>
   <% end %>
   Searching keyword : <%= params[:keyword] %>
-  <%= link_to 'Cancel Search', topics_path, class: 'btn btn-warning' %>
 </p>
 
 <p>
   <%= form_tag topics_path, method: :get do %>
     <%= select_tag "category", options_from_collection_for_select(Category.all, "name", "name", params[:category]), onchange: 'this.form.submit()', prompt: "ALL" %>
+  <!-- 第一個name是指，第二個name是指要顯示在選項上的欄位為name -->
   <% end %>
 </p>
 
@@ -46,7 +47,9 @@
 				<%= t.user.nickname %><br>
 				(<%= t.user.email %>)
 			</td>
-			<td><%= t.comments.count %></td>
+			<td>
+				<div class="comments_count"><%= t.comments.count %></div>
+			</td>
 			<td>
 				<%= t.created_at.strftime("%b %d. %Y") %><br>
 				<%= t.created_at.strftime("%H:%M:%S") %>
