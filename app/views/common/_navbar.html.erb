@@ -1,14 +1,21 @@
-  <nav class="navbar navbar-default">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="">My Forum</a>
-    </div>
-    <ul class="nav navbar-nav navbar-right">
-    	<% if current_user %>
-		    <li><%= link_to('登出', destroy_user_session_path, :method => :delete) %></li>
-		    <li><%= link_to('修改密碼', edit_registration_path(:user)) %></li>
-		  <% else %>
-		    <li><%= link_to('註冊', new_registration_path(:user)) %></li>
-		    <li><%= link_to('登入', new_session_path(:user)) %></li>
-		  <% end %>
-    </ul>
+  <nav class="navbar navbar-reverse">
+    <a class="navbar-brand" href="">My Forum</a>
+    <% if current_user %>
+
+        <div class="dropdown pull-right">
+          <button class="btn btn-warning btn-sm dropdown-toggle" type="button" data-toggle="dropdown">
+            Hi, <%= current_user.first_name %>(<%= current_user.email %>)
+          <span class="caret"></span></button>
+          <ul class="dropdown-menu">
+            <li><%= link_to 'My profile', users_path %></li>
+            <li><a href="#">My posts</a></li>
+            <li><%= link_to('登出', destroy_user_session_path, :method => :delete) %></li>
+          </ul>
+        </div>
+      <% else %>
+        <%= link_to('註冊', new_registration_path(:user)) %>
+        <%= link_to('登入', new_session_path(:user)) %>
+      <% end %>
+
+
   </nav>

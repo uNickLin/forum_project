@@ -79,8 +79,6 @@ class TopicsController < ApplicationController
 
 	end
 
-
-
 	private
 
 	def topic_params

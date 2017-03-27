@@ -9,25 +9,9 @@
   </head>
 
   <body>
-  	<div class="container-fluid">
-      <% if current_user %>
+    <div class="container-fluid">
+      <%= render partial: 'common/navbar' %>
 
-        <div class="dropdown">
-          <button class="btn btn-primary btn-sm dropdown-toggle" type="button" data-toggle="dropdown">
-            Hi, <%= current_user.first_name %>(<%= current_user.email %>)
-          <span class="caret"></span></button>
-          <ul class="dropdown-menu">
-            <li><a href="#">My profile</a></li>
-            <li><a href="#">My posts</a></li>
-          </ul>
-        </div>
-
-        <%= link_to('登出', destroy_user_session_path, :method => :delete) %>
-        <%= link_to('修改密碼', edit_registration_path(:user)) %>
-      <% else %>
-        <%= link_to('註冊', new_registration_path(:user)) %>
-        <%= link_to('登入', new_session_path(:user)) %>
-      <% end %>
 	    <%= yield %>
     </div>
   </body>
