@@ -25,6 +25,7 @@
 	<tr>
 		<th class="text-center">分類</th>
 		<th class="text-center">標題</th>
+		<th class="text-center">留言數</th>
 		<th class="text-center">建立日期</th>
 		<th class="text-center">作者</th>
 		<th class="text-center"></th>
@@ -33,6 +34,7 @@
 		<tr>
 			<td>【<%= t.category.name %>】</td>
 			<td><%= link_to t.title, topic_path(t) %></td>
+			<td><%= t.comments.count %></td>
 			<td><%= t.created_at.to_date %></td>
 			<td><%= t.user.email %></td>
 			<td>
