@@ -10,16 +10,6 @@ class TopicsController < ApplicationController
                 Topic.where( [ "title like ?", "%#{params[:keyword]}%" ] ).page(params[:page]).per(10)
              	elsif category
               	category.topics.order("created_at DESC").page(params[:page]).per(10)
-            	# elsif params[:sort]
-            	# 	last_comment = []
-            	# 	Topic.all.each do |s|
-            	# 		last_comment << s.comments.last
-            	# 	end
-
-            	# 	last_comment.delete_if {|x| x = nil }
-            	# 	last_comment.sort{|a,b| b.created_at <=> b.created_at }
-            	# 	Kaminari.paginate_array(last_comment).page(params[:page]).per(10)
-
               else
                 Topic.order("created_at DESC").page(params[:page]).per(10)
               end
@@ -78,18 +68,22 @@ class TopicsController < ApplicationController
 
 	def comments
 		@comment = @topic.comments.new(comment_params)
-    @topic.latest_comment = @topic.comments.last.created_at
-		@comment.user = current_user
-		@comment.save
+    @comment.user = current_user
+    if @comment.save
+      @topic.latest_comment_time = @topic.comments.last
+      @topic.comments_num = @topic.comments.count
+      @topic.save
 
-		redirect_to topic_path(@topic)
+      redirect_to topic_path(@topic)
+
+    end
 
 	end
 
 	private
 
 	def topic_params
-		params.require(:topic).permit(:title, :content, :category_id, :user_id)
+		params.require(:topic).permit(:title, :content, :category_id, :user_id, :latest_comment, :comments_num)
 
 	end
 
