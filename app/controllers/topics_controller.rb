@@ -66,12 +66,19 @@ class TopicsController < ApplicationController
 	def destroy
 		@topic.destroy
 
-		redirect_to topics_path
-		flash[:alert] = "刪除成功！"
+    respond_to do |format|
+      # remote: true
+      format.js #destroy.js.erb
+      format.html {redirect_to topics_path}
+    end
+
+		# redirect_to topics_path
+		# flash[:alert] = "刪除成功！"
 	end
 
 	def comments
 		@comment = @topic.comments.new(comment_params)
+    @topic.latest_comment = @topic.comments.last.created_at
 		@comment.user = current_user
 		@comment.save
 

@@ -12,11 +12,13 @@
 <p>
   <%= form_tag topics_path, method: :get do %>
     <%= select_tag "category", options_from_collection_for_select(Category.all, "name", "name", params[:category]), onchange: 'this.form.submit()', prompt: "ALL" %>
-  <!-- 第一個name是指，第二個name是指要顯示在選項上的欄位為name -->
+  <!-- 第一個name是指要回傳的參數，第二個name是指要顯示在選項上的欄位為name -->
+  <!-- category = Category.find_by(name: params[:category]) if params[:category]中的name即對應上述第一個回傳參數 -->
+  <!-- 也可回傳:id, 第二行則為 Category.find(params[:category]) -->
   <% end %>
 </p>
 
-<%= link_to 'New topic', new_topic_path , class: "btn btn-success" %><br>
+	<%= link_to 'New topic', new_topic_path , class: "btn btn-success" %><br>
 
 <div class="paginate text-center">
 	<%= paginate @topics %>
@@ -40,7 +42,7 @@
 		</tr>
 	</thead>
 	<% @topics.each do |t|%>
-		<tr>
+		<tr id="topic-<%= t.id %>">
 			<td>【<%= t.category.name %>】</td>
 			<td><%= link_to t.title, topic_path(t) %></td>
 			<td>
@@ -65,7 +67,7 @@
 			<td>
 				<% if current_user && current_user.is_creator?(t) %>
 					<%= link_to 'EDIT', edit_topic_path(t), class: "btn btn-primary" %>
-					<%= link_to 'DEL', topic_path(t), class: "btn btn-danger", method: :delete, data: {confirm: 'Are you sure ?'} %>
+					<%= link_to 'DEL', topic_path(t), class: "btn btn-danger", method: :delete, data: {confirm: 'Are you sure ?'}, remote: true %>
 				<% end %>
 			</td>
 		</tr>
