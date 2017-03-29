@@ -39,6 +39,14 @@ ul{
 	padding-left: 0;
 }
 
+h1{
+	text-align: center;
+}
+
+.summary{
+	margin: auto;
+}
+
 .navbar a:link{
 	color: white;
 }
@@ -88,6 +96,12 @@ a:hover{
 	margin: 20px auto;
 	box-shadow: 5px 5px 5px rgba(0,0,0,.5);
 	transition: .5s;
+}
+
+.profile_card .photo{
+	width: 100px;
+	height: 100px;
+	margin: auto;
 }
 
 .profile_card:hover{

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170328085913) do
+ActiveRecord::Schema.define(version: 20170329043454) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name"
@@ -33,7 +33,7 @@ ActiveRecord::Schema.define(version: 20170328085913) do
     t.datetime "updated_at",          null: false
     t.integer  "category_id"
     t.integer  "user_id"
-    t.integer  "latest_comment" #abandon
+    t.integer  "latest_comment"
     t.integer  "comments_num"
     t.date     "latest_comment_time"
   end
@@ -54,6 +54,7 @@ ActiveRecord::Schema.define(version: 20170328085913) do
     t.string   "first_name"
     t.string   "last_name"
     t.string   "nickname"
+    t.string   "user_photo"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

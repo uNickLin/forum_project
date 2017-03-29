@@ -5,6 +5,11 @@ Rails.application.routes.draw do
   	member do
       post :comments
     end
+
+    collection do
+      get :about_us
+    end
+
   end
 
   resources :users do

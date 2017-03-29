@@ -4,7 +4,7 @@
 
 <div class="profile_card">
   <div class="photo">
-
+    <%= image_tag current_user.user_photo.url if current_user.user_photo.url %>
   </div>
   <hr>
   <table class="profile_info table table-striped"">

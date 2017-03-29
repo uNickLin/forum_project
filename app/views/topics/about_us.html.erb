@@ -1,0 +1,26 @@
+<h1>My forum</h1>
+<br>
+<div class="about_us_intro text-center">
+  <h4>Asking whatever you want here !</h4>
+  <table class="summary table-condensed">
+    <thead>
+      <tr>
+        <th>Active users</th>
+        <th>Posted topics</th>
+        <th>All comments</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><%= User.all.count %></td>
+        <td><%= Topic.all.count %></td>
+        <td><%= Comment.all.count %></td>
+      </tr>
+    </tbody>
+
+  </table>
+</div>
+<div class="front_img">
+  <%= link_to image_tag("http://www.alternatesol.com/images/fb-banner-1.jpg",width: '100%', border: 0), topics_path(comments_sort: :comments_up) %>
+</div>
+<h5 class="text-center">Click the image above to enter forum !</h5>

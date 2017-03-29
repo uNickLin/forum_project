@@ -17,7 +17,8 @@ namespace :dev do
                             password: '111111',
                             first_name: Faker::Name.first_name,
                             last_name: Faker::Name.last_name,
-                            nickname: Faker::Pokemon.name)
+                            nickname: Faker::Pokemon.name,
+                            user_photo: '/assets/images/rsz_batman.jpg')
     end
 
     35.times do #隨機產生35篇文章

@@ -1,7 +1,7 @@
 class TopicsController < ApplicationController
 
-	before_action :authenticate_user!, except: [:index, :new, :create]
-	before_action :find_topic, except: [:index, :new, :create]
+	before_action :authenticate_user!, except: [:index, :about_us]
+	before_action :find_topic, except: [:index, :new, :create, :about_us]
 
 	def index
 		category = Category.find_by(name: params[:category]) if params[:category]
@@ -97,6 +97,10 @@ class TopicsController < ApplicationController
     end
 
 	end
+
+  def about_us
+
+  end
 
 	private
 
