@@ -37,10 +37,14 @@
 				<!-- Sorting guide => http://railscasts.com/episodes/228-sortable-table-columns?view=asciicast -->
 			</th>
 			<th class="text-center">
+				<%= link_to image_tag("up_arrow.svg", width: 25, border: 0), topics_path(post_sort: :post_up) %>
 				建立日期
+				<%= link_to image_tag("down_arrow.svg", width: 25, border: 0), topics_path(post_sort: :post_down) %>
 			</th>
 			<th class="text-center">
+				<%= link_to image_tag("up_arrow.svg", width: 25, border: 0), topics_path(latest_comment_sort: :latest_comment_up) %>
 				最新回覆
+				<%= link_to image_tag("down_arrow.svg", width: 25, border: 0), topics_path(latest_comment_sort: :latest_comment_down) %>
 			</th>
 			<th class="text-center"></th>
 		</tr>

@@ -10,13 +10,24 @@ class TopicsController < ApplicationController
                 Topic.where( [ "title like ?", "%#{params[:keyword]}%" ] ).page(params[:page]).per(10)
              	elsif category
               	category.topics.order("created_at DESC").page(params[:page]).per(10)
-              elsif params[:comments_sort]
+              elsif params[:comments_sort] #根據使用者點擊留言數的左右箭頭排列ACS/DESC
                 if params[:comments_sort] == 'comments_up'
                   Topic.order("comments_num ASC").page(params[:page]).per(10)
                 elsif params[:comments_sort] == 'comments_down'
                   Topic.order("comments_num DESC").page(params[:page]).per(10)
                 end
-
+              elsif params[:post_sort] #根據使用者點擊建立日期的左右箭頭排列ACS/DESC
+                if params[:post_sort] == 'post_up'
+                  Topic.order("created_at ASC").page(params[:page]).per(10)
+                elsif params[:post_sort] == 'post_down'
+                  Topic.order("created_at DESC").page(params[:page]).per(10)
+                end
+              elsif params[:latest_comment_sort] #根據使用者點擊最新留言的左右箭頭排列ACS/DESC
+                if params[:latest_comment_sort] == 'latest_comment_up'
+                  Topic.order("latest_comment_time ASC").page(params[:page]).per(10)
+                elsif params[:latest_comment_sort] == 'latest_comment_down'
+                  Topic.order("latest_comment_time DESC").page(params[:page]).per(10)
+                end
               else
                 Topic.order("created_at DESC").page(params[:page]).per(10)
               end
