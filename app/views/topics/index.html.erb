@@ -34,7 +34,6 @@
 				<%= link_to image_tag("up_arrow.svg", width: 25, border: 0), topics_path(comments_sort: :comments_up) %>
 				留言數
 				<%= link_to image_tag("down_arrow.svg", width: 25, border: 0), topics_path(comments_sort: :comments_down) %>
-				<!-- Sorting guide => http://railscasts.com/episodes/228-sortable-table-columns?view=asciicast -->
 			</th>
 			<th class="text-center">
 				<%= link_to image_tag("up_arrow.svg", width: 25, border: 0), topics_path(post_sort: :post_up) %>
@@ -58,7 +57,11 @@
 				(<%= t.user.email %>)
 			</td>
 			<td>
-				<div class="comments_count"><%= t.comments_num %></div>
+				<% if t.comments_num %>
+					<div class="comments_count"><%= t.comments_num %></div>
+				<% else %>
+					<div class="comments_count">0</div>
+				<% end %>
 			</td>
 			<td>
 				<%= t.created_at.strftime("%b %d. %Y") %><br>
