@@ -118,5 +118,59 @@ a:hover{
 	width: 100%;
 }
 
+.my_view_box{
+	height: 360px;
+	overflow: scroll;
+	padding-top: 10px;
+}
+
+.my_comments{
+	margin-bottom: 20px;
+}
+
+.my_comments .col-sm-4{
+	height: 120px;
+	// overflow: scroll;
+
+}
+
+.my_comments .my_comments_box{
+	background-color: $color_skin;
+	border-radius: 10px;
+	padding: 10px;
+	height: 110px;
+	position: relative;
+
+	box-shadow: 5px 5px 5px rgba(0,0,0,.3);
+	transition: .5s;
+	cursor: pointer;
+}
+
+.my_comments .my_comments_box:hover{
+	transform: translate(-3px, -3px);
+	box-shadow: 5px 5px 8px rgba(0,0,0,.8);
+}
+
+.my_comments .my_comments_box h4{
+	margin-top: 0;
+}
+
+.my_comments .my_comments_box .my_read_more{
+	position: absolute;
+	right: 8px;
+	bottom: 8px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 

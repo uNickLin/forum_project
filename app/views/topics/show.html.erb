@@ -13,14 +13,15 @@
 </h5>
 
 <%= link_to 'EDIT', edit_topic_path(@topic), class: "btn btn-primary" %>
-<%= link_to 'Back', topics_path, class: "btn btn-default" %>
+<%= link_to 'Back', request.referer.present? ? request.referer : topics_path, class: "btn btn-default" %>
+<!-- 如果是從其他連結進入此頁面就會返回上一頁，其他皆導回topics_path -->
 
 <hr>
 
 <ul>
   <% @topic.comments.each do |m| %>
   <li>
-    <h4><%= m.user.email %></h4>
+    <h4><%= m.user.nickname %></h4>
     <span class="pull-right">
       <%= m.created_at.strftime("%b %d. %Y") %>,
       <%= m.created_at.strftime("%H:%M:%S") %>

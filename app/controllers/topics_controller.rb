@@ -91,7 +91,6 @@ class TopicsController < ApplicationController
       @topic.latest_comment_time = @topic.comments.last
       @topic.comments_num = @topic.comments.count
       @topic.save
-      byebug
       redirect_to topic_path(@topic)
 
     end
