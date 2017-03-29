@@ -33,7 +33,7 @@ ActiveRecord::Schema.define(version: 20170328085913) do
     t.datetime "updated_at",          null: false
     t.integer  "category_id"
     t.integer  "user_id"
-    t.integer  "latest_comment"
+    t.integer  "latest_comment" #abandon
     t.integer  "comments_num"
     t.date     "latest_comment_time"
   end

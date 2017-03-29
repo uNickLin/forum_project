@@ -10,6 +10,13 @@ class TopicsController < ApplicationController
                 Topic.where( [ "title like ?", "%#{params[:keyword]}%" ] ).page(params[:page]).per(10)
              	elsif category
               	category.topics.order("created_at DESC").page(params[:page]).per(10)
+              elsif params[:comments_sort]
+                if params[:comments_sort] == 'comments_up'
+                  Topic.order("comments_num ASC").page(params[:page]).per(10)
+                elsif params[:comments_sort] == 'comments_down'
+                  Topic.order("comments_num DESC").page(params[:page]).per(10)
+                end
+
               else
                 Topic.order("created_at DESC").page(params[:page]).per(10)
               end
@@ -73,7 +80,7 @@ class TopicsController < ApplicationController
       @topic.latest_comment_time = @topic.comments.last
       @topic.comments_num = @topic.comments.count
       @topic.save
-
+      byebug
       redirect_to topic_path(@topic)
 
     end
@@ -83,7 +90,7 @@ class TopicsController < ApplicationController
 	private
 
 	def topic_params
-		params.require(:topic).permit(:title, :content, :category_id, :user_id, :latest_comment, :comments_num)
+		params.require(:topic).permit(:title, :content, :category_id, :user_id, :latest_comment_time, :comments_num)
 
 	end
 

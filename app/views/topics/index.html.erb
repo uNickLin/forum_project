@@ -31,12 +31,16 @@
 			<th class="text-center">標題</th>
 			<th class="text-center">作者</th>
 			<th class="text-center">
+				<%= link_to image_tag("up_arrow.svg", width: 25, border: 0), topics_path(comments_sort: :comments_up) %>
 				留言數
+				<%= link_to image_tag("down_arrow.svg", width: 25, border: 0), topics_path(comments_sort: :comments_down) %>
 				<!-- Sorting guide => http://railscasts.com/episodes/228-sortable-table-columns?view=asciicast -->
 			</th>
-			<th class="text-center">建立日期</th>
 			<th class="text-center">
-				<%= link_to '最新回覆', sort: 'created_at' %>
+				建立日期
+			</th>
+			<th class="text-center">
+				最新回覆
 			</th>
 			<th class="text-center"></th>
 		</tr>
@@ -50,7 +54,7 @@
 				(<%= t.user.email %>)
 			</td>
 			<td>
-				<div class="comments_count"><%= t.comments.count %></div>
+				<div class="comments_count"><%= t.comments_num %></div>
 			</td>
 			<td>
 				<%= t.created_at.strftime("%b %d. %Y") %><br>
