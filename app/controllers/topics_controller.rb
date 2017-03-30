@@ -107,7 +107,7 @@ class TopicsController < ApplicationController
       @comment = Comment.find(params[:c])
       @comment.destroy
 
-      redirect_to my_posts_user_path(current_user)
+      redirect_to my_posts_users_path
     end
 
   end
