@@ -18,18 +18,23 @@
 
 <hr>
 
-<ul>
-  <% @topic.comments.each do |m| %>
-  <li>
-    <h4><%= m.user.nickname %></h4>
-    <span class="pull-right">
-      <%= m.created_at.strftime("%b %d. %Y") %>,
-      <%= m.created_at.strftime("%H:%M:%S") %>
-    </span>
-    <p><%= m.message %></p>
-  </li>
-  <% end %>
-</ul>
+<div class="topic_comments">
+  <ul>
+    <% @topic.comments.each do |m| %>
+    <li>
+      <h4><%= m.user.nickname %></h4>
+      <% if current_user && current_user.is_creator?(m) %>
+        <%= link_to 'X', del_comment_topic_path(m: m), method: :delete, data: {confirm: 'Are you sure ?'}, class: "btn btn-danger btn-xs pull-right" %>
+      <% end %>
+      <span class="pull-right">
+        <%= m.created_at.strftime("%b %d. %Y") %>,
+        <%= m.created_at.strftime("%H:%M:%S") %>
+      </span>
+      <p><%= m.message %></p>
+    </li>
+    <% end %>
+  </ul>
+</div>
 
 <%= simple_form_for @comment, url:comments_topic_path(@topic)  do |n| %>
   <div class="form-group">

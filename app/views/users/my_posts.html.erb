@@ -41,7 +41,7 @@
           <td>
             <% if current_user && current_user.is_creator?(t) %>
               <%= link_to 'EDIT', edit_topic_path(t), class: "btn btn-primary" %>
-              <%= link_to 'DEL', topic_path(t), class: "btn btn-danger", method: :delete, data: {confirm: 'Are you sure ?'} %>
+              <%= link_to 'DEL', del_my_post_users_path(id: t), method: :delete, class: "btn btn-danger", data: {confirm: 'Are you sure ?'} %>
             <% end %>
           </td>
         </tr>
@@ -58,8 +58,11 @@
         <li class="col-sm-4">
           <div class="my_comments_box">
             <h4 class="text-center">【<%= c.topic.category.name %>】<%= c.topic.title %></h4>
+            <h6 class="text-center"><%= c.created_at.strftime("%b %d. %Y, %H:%M:%S") %></h6>
             <p><%= c.message %></p>
             <%= link_to 'Read more', topic_path(c.topic), class: "btn btn-warning btn-xs my_read_more" %>
+            <%= link_to 'Delete', del_comment_topic_path(id: c.topic_id, c: c), method: :delete, data: {confirm: 'Are you sure ?'}, class: "btn btn-danger btn-xs my_delete" %>
+            <!-- @my_comments = current_user.comments.order("created_at desc") -->
           </div>
         </li>
       <% end %>

@@ -3,8 +3,8 @@
 <p>
   <%= form_tag topics_path, method: :get do %>
     <%= text_field_tag "keyword" %>
-    <%= submit_tag "Search", class: "btn btn-default" %>
-    <%= link_to 'Cancel Search', topics_path, class: 'btn btn-warning' %>
+    <%= submit_tag "Search", class: "btn btn-warning" %>
+    <%= link_to 'Cancel Search', topics_path, class: 'btn btn-default' %>
   <% end %>
   Searching keyword : <%= params[:keyword] %>
 </p>

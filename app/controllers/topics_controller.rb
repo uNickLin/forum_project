@@ -53,7 +53,7 @@ class TopicsController < ApplicationController
 
 	def show
 		@comment = Comment.new
-		@comments = Comment.all
+		@comments = Comment.order("created_at desc")
 
 	end
 
@@ -97,9 +97,22 @@ class TopicsController < ApplicationController
 
 	end
 
-  def about_us
+  def del_comment
+    if params[:m]
+      @comment = @topic.comments.find(params[:m])
+      @comment.destroy
+
+      redirect_to topic_path(@topic)
+    elsif params[:c]
+      @comment = Comment.find(params[:c])
+      @comment.destroy
+
+      redirect_to my_posts_user_path(current_user)
+    end
 
   end
+
+
 
 	private
 
