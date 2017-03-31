@@ -14,9 +14,14 @@
 <!-- 如果是從其他連結進入此頁面就會返回上一頁，其他皆導回topics_path -->
 <% end %>
 <hr>
-
+<p>
+參與回覆者：
+<% @topic.group_by_comments_users(@topic).each do |u| %>
+  <%= u %>,
+<% end %>
+</p>
+回覆數(<%= @topic.comments.count %>)
 <div class="topic_comments">
-
   <ul>
     <% @topic.comments.each do |m| %>
     <li class="comment_boxes">
