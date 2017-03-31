@@ -9,10 +9,10 @@
 </p>
 
 <% if current_user && current_user.is_creator?(@topic) %>
-  <%= link_to 'EDIT', edit_topic_path(@topic), class: "btn btn-primary btn-sm" %>
-  <%= link_to 'Back', request.referer.present? ? request.referer : topics_path, class: "btn btn-default btn-sm" %>
+  <%= link_to '', edit_topic_path(@topic), class: "fa fa-pencil btn btn-primary btn-sm" %>
 <!-- 如果是從其他連結進入此頁面就會返回上一頁，其他皆導回topics_path -->
 <% end %>
+<%= link_to '', request.referer.present? ? request.referer : topics_path, class: "fa  fa-chevron-left btn btn-default btn-sm" %>
 <hr>
 <p>
 參與回覆者：
