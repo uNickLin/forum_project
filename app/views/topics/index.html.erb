@@ -3,8 +3,8 @@
 <p>
   <%= form_tag topics_path, method: :get do %>
     <%= text_field_tag "keyword" %>
-    <%= submit_tag "Search", class: "btn btn-warning" %>
-    <%= link_to 'Cancel Search', topics_path, class: 'btn btn-default' %>
+    <%= submit_tag 'Search', class: "fa fa-search btn btn-warning btn-sm" %>
+    <%= link_to 'Cancel Search', topics_path, class: 'btn btn-default btn-sm' %>
   <% end %>
   Searching keyword : <%= params[:keyword] %>
 </p>
@@ -18,7 +18,7 @@
   <% end %>
 </p>
 
-	<%= link_to 'New topic', new_topic_path , class: "btn btn-success" %><br>
+	<%= link_to '', new_topic_path , class: "fa fa-pencil-square-o btn btn-success btn-sm" %><br>
 
 <div class="paginate text-center">
 	<%= paginate @topics %>
@@ -77,8 +77,8 @@
 			</td>
 			<td>
 				<% if current_user && current_user.is_creator?(t) %>
-					<%= link_to 'EDIT', edit_topic_path(t), class: "btn btn-primary" %>
-					<%= link_to 'DEL', topic_path(t), class: "btn btn-danger", method: :delete, data: {confirm: 'Are you sure ?'}, remote: true %>
+					<%= link_to '', edit_topic_path(t), class: "fa fa-pencil btn btn-primary btn-sm" %>
+					<%= link_to '', topic_path(t), class: "fa fa-times btn btn-danger btn-sm", method: :delete, data: {confirm: 'Are you sure ?'}, remote: true %>
 				<% end %>
 			</td>
 		</tr>

@@ -1,31 +1,32 @@
-<h1><%= @topic.title %></h1>
+<h1>【<%= @topic.category.name %>】<%= @topic.title %></h1>
 
-<h3>
-	類別 ： 【<%= @topic.category.name %>】
-</h3>
-
-<h4>
-  作者 ： <%= @topic.user.email %>
+<h4 class="text-center">
+  By : <%= @topic.user.email %>
 </h4>
 
-<h5>
-	內文 ： <%= @topic.content %>
-</h5>
+<p class="topic_content">
+	<%= @topic.content %>
+</p>
 
-<%= link_to 'EDIT', edit_topic_path(@topic), class: "btn btn-primary" %>
-<%= link_to 'Back', request.referer.present? ? request.referer : topics_path, class: "btn btn-default" %>
+<% if current_user && current_user.is_creator?(@topic) %>
+  <%= link_to 'EDIT', edit_topic_path(@topic), class: "btn btn-primary btn-sm" %>
+  <%= link_to 'Back', request.referer.present? ? request.referer : topics_path, class: "btn btn-default btn-sm" %>
 <!-- 如果是從其他連結進入此頁面就會返回上一頁，其他皆導回topics_path -->
-
+<% end %>
 <hr>
 
 <div class="topic_comments">
+
   <ul>
     <% @topic.comments.each do |m| %>
-    <li>
-      <h4><%= m.user.nickname %></h4>
-      <% if current_user && current_user.is_creator?(m) %>
-        <%= link_to 'X', del_comment_topic_path(m: m), method: :delete, data: {confirm: 'Are you sure ?'}, class: "btn btn-danger btn-xs pull-right" %>
-      <% end %>
+    <li class="comment_boxes">
+      <h4><%= m.user.nickname %> (<span><%= m.user.email %></span>) </h4>
+      <div class="comment_btns">
+        <% if current_user && current_user.is_creator?(m) %>
+          <%= link_to '', topic_path(e: m), class: "fa fa-pencil btn btn-primary btn-xs" %>
+          <%= link_to '', del_comment_topic_path(m: m), method: :delete, data: {confirm: 'Are you sure ?'}, class: "fa fa-times btn btn-danger btn-xs" %>
+        <% end %>
+      </div>
       <span class="pull-right">
         <%= m.created_at.strftime("%b %d. %Y") %>,
         <%= m.created_at.strftime("%H:%M:%S") %>
@@ -36,9 +37,11 @@
   </ul>
 </div>
 
-<%= simple_form_for @comment, url:comments_topic_path(@topic)  do |n| %>
+<%= simple_form_for @comment, url:comments_topic_path(@topic,m: @comment), method: :post  do |n| %>
+<!-- url:comments_topic_path(@topic,m: @comment)後面的m: @comment是在編輯時會把帶進來的文字給一個key m
+     好讓controller中的def comments 可以辨識這是新的留言還是編輯舊的留言 -->
   <div class="form-group">
     <%= n.input :message, input_html: { class: "form-control"} %>
   </div>
-  <%= n.submit %>
+  <%= n.submit 'Post comment', class: "btn btn-success btn-sm" %>
 <% end %>

@@ -12,5 +12,9 @@ class UsersController < ApplicationController
 
   end
 
+  def my_collection
+
+  end
+
 
 end

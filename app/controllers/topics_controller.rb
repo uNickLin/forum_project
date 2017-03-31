@@ -52,8 +52,12 @@ class TopicsController < ApplicationController
 	end
 
 	def show
-		@comment = Comment.new
-		@comments = Comment.order("created_at desc")
+    if params[:e]
+      @comment = @topic.comments.find(params[:e])
+    else
+		  @comment = Comment.new
+		  @comments = Comment.order("created_at desc")
+    end
 
 	end
 
@@ -85,22 +89,39 @@ class TopicsController < ApplicationController
 	end
 
 	def comments
-		@comment = @topic.comments.new(comment_params)
-    @comment.user = current_user
-    if @comment.save
-      @topic.latest_comment_time = @topic.comments.last
-      @topic.comments_num = @topic.comments.count
-      @topic.save
-      redirect_to topic_path(@topic)
 
+		 if params[:m]
+
+      @comment = @topic.comments.find(params[:m])
+
+      @comment.update(comment_params)
+
+       redirect_to topic_path(@topic)
+    else
+
+      @comment = @topic.comments.new(comment_params)
+      @comment.user = current_user
+      if @comment.save
+        @topic.latest_comment_time = @topic.comments.last
+        @topic.comments_num = @topic.comments.count
+        @topic.save
+        redirect_to topic_path(@topic)
+      else
+        render :show
+
+      end
     end
 
 	end
 
+  def edit_comment
+
+  end
+
   def del_comment
     if params[:m]
       @comment = @topic.comments.find(params[:m])
-      @comment.destroy
+      @current_user.comment.destroy
 
       redirect_to topic_path(@topic)
     elsif params[:c]
