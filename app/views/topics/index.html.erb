@@ -1,25 +1,27 @@
 <h1>Welcome to forum !</h1>
 
-<p>
-  <%= form_tag topics_path, method: :get do %>
-    <%= text_field_tag "keyword" %>
-    <%= submit_tag 'Search', class: "fa fa-search btn btn-warning btn-sm" %>
-    <%= link_to 'Cancel Search', topics_path, class: 'btn btn-default btn-sm' %>
-  <% end %>
-  Searching keyword : <%= params[:keyword] %>
-</p>
+<div class="seachbar text-center">
+	<p>
+	  <%= form_tag topics_path, method: :get do %>
+	    <%= text_field_tag "keyword" %>
+	    <%= submit_tag 'Search', class: "fa fa-search btn btn-warning btn-sm" %>
+	    <%= link_to 'Cancel Search', topics_path, class: 'btn btn-default btn-sm' %>
+	  <% end %>
+ 	<p>
+	  <%= form_tag topics_path, method: :get do %>
+	    <%= select_tag "category", options_from_collection_for_select(Category.all, "name", "name", params[:category]), onchange: 'this.form.submit()', prompt: "ALL" %>
+	  <!-- 第一個name是指要回傳的參數，第二個name是指要顯示在選項上的欄位為name -->
+	  <!-- category = Category.find_by(name: params[:category]) if params[:category]中的name即對應上述第一個回傳參數 -->
+	  <!-- 也可回傳:id, 第二行則為 Category.find(params[:category]) -->
+	  <% end %>
+	</p>
+	  Searching keyword : <%= params[:keyword] %>
+	</p>
+</div>
 
-<p>
-  <%= form_tag topics_path, method: :get do %>
-    <%= select_tag "category", options_from_collection_for_select(Category.all, "name", "name", params[:category]), onchange: 'this.form.submit()', prompt: "ALL" %>
-  <!-- 第一個name是指要回傳的參數，第二個name是指要顯示在選項上的欄位為name -->
-  <!-- category = Category.find_by(name: params[:category]) if params[:category]中的name即對應上述第一個回傳參數 -->
-  <!-- 也可回傳:id, 第二行則為 Category.find(params[:category]) -->
-  <% end %>
-</p>
-
+<div class="new_post text-center">
 	<%= link_to '', new_topic_path , class: "fa fa-pencil-square-o btn btn-success btn-sm" %><br>
-
+</div>
 <div class="paginate text-center">
 	<%= paginate @topics %>
 </div>

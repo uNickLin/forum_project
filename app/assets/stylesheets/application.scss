@@ -3,7 +3,7 @@
 @import "font-awesome-sprockets";
 @import "font-awesome";
 
-// ====================================================================================================
+// =========================================common sets================================================
 
 
 $color_powder_white: #EEEFEA;
@@ -33,9 +33,17 @@ h1{
 	text-align: center;
 }
 
+// =========================================about us page================================================
+
+
 .summary{
 	margin: auto;
 }
+
+
+
+// ===============================================navbar=================================================
+
 
 .navbar a:link{
 	color: white;
@@ -52,12 +60,12 @@ a:hover{
 .navbar{
 	background-color: $color_orange;
 	margin: -10px -25px 0 -25px;
-	display: flex;
+	// display: flex;
 }
 
-.dropdown{
-	display: flex;
-}
+
+// =======================================topic index page=============================================
+
 
 .container-fluid{
 	width: 80vw;
@@ -76,6 +84,9 @@ a:hover{
 	color: $color_powder_white;
 	margin: 0 auto;
 }
+
+
+// =======================================my profile page=============================================
 
 .profile_card{
 	width: 400px;
@@ -156,6 +167,10 @@ a:hover{
 	right: 8px;
 	bottom: 8px;
 }
+
+
+// =======================================topic show page=============================================
+
 
 .topic_comments{
 	max-height: 420px;
