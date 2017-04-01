@@ -165,6 +165,22 @@ class TopicsController < ApplicationController
   end
 
 
+  def like
+    unless @topic.is_liked_by(current_user)
+      Like.create( topic: @topic, user: current_user )
+    end
+    redirect_to topic_path(@topic)
+
+  end
+
+  def unlike
+    like = @topic.find_like(current_user)
+    like.destroy
+
+    redirect_to topic_path(@topic)
+  end
+
+
 
 	private
 
