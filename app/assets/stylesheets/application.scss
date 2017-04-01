@@ -19,7 +19,7 @@ $color_skin : #F7D098;
 }
 
 body, html{
-	height: 120%;
+	height: 130%;
 	background-image: url("http://i40.tinypic.com/2ho9szs.gif");
 }
 
@@ -31,6 +31,13 @@ ul{
 
 h1{
 	text-align: center;
+}
+
+.title_bar{
+	height: 8px;
+	width: 50px;
+	background-color: red;
+	margin: 10px auto 20px auto;
 }
 
 // =========================================about us page================================================
@@ -127,6 +134,7 @@ a:hover{
 	height: 350px;
 	overflow: scroll;
 	padding-top: 10px;
+	margin-top: 20px;
 }
 
 .my_comments{

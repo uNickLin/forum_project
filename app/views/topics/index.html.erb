@@ -2,13 +2,13 @@
 
 <div class="seachbar text-center">
 	<p>
-	  <%= form_tag topics_path, method: :get do %>
+	  <%= form_tag topics_path, remote: true, method: :get do %>
 	    <%= text_field_tag "keyword" %>
 	    <%= submit_tag 'Search', class: "fa fa-search btn btn-warning btn-sm" %>
 	    <%= link_to 'Cancel Search', topics_path, class: 'btn btn-default btn-sm' %>
 	  <% end %>
  	<p>
-	  <%= form_tag topics_path, method: :get do %>
+	  <%= form_tag topics_path, remote: true, method: :get do %>
 	    <%= select_tag "category", options_from_collection_for_select(Category.all, "name", "name", params[:category]), onchange: 'this.form.submit()', prompt: "ALL" %>
 	  <!-- 第一個name是指要回傳的參數，第二個name是指要顯示在選項上的欄位為name -->
 	  <!-- category = Category.find_by(name: params[:category]) if params[:category]中的name即對應上述第一個回傳參數 -->
@@ -33,25 +33,25 @@
 			<th class="text-center">標題</th>
 			<th class="text-center">作者</th>
 			<th class="text-center">
-				<%= link_to image_tag("up_arrow.svg", width: 25, border: 0), topics_path(comments_sort: :comments_up) %>
+				<%= link_to image_tag("up_arrow.svg", width: 25, border: 0), topics_path(comments_sort: :comments_up), remote: true %>
 				留言數
-				<%= link_to image_tag("down_arrow.svg", width: 25, border: 0), topics_path(comments_sort: :comments_down) %>
+				<%= link_to image_tag("down_arrow.svg", width: 25, border: 0), topics_path(comments_sort: :comments_down), remote: true %>
 			</th>
 			<th class="text-center">
-				<%= link_to image_tag("up_arrow.svg", width: 25, border: 0), topics_path(post_sort: :post_up) %>
+				<%= link_to image_tag("up_arrow.svg", width: 25, border: 0), topics_path(post_sort: :post_up), remote: true %>
 				建立日期
-				<%= link_to image_tag("down_arrow.svg", width: 25, border: 0), topics_path(post_sort: :post_down) %>
+				<%= link_to image_tag("down_arrow.svg", width: 25, border: 0), topics_path(post_sort: :post_down), remote: true %>
 			</th>
 			<th class="text-center">
-				<%= link_to image_tag("up_arrow.svg", width: 25, border: 0), topics_path(latest_comment_sort: :latest_comment_up) %>
+				<%= link_to image_tag("up_arrow.svg", width: 25, border: 0), topics_path(latest_comment_sort: :latest_comment_up), remote: true %>
 				最新回覆
-				<%= link_to image_tag("down_arrow.svg", width: 25, border: 0), topics_path(latest_comment_sort: :latest_comment_down) %>
+				<%= link_to image_tag("down_arrow.svg", width: 25, border: 0), topics_path(latest_comment_sort: :latest_comment_down), remote: true %>
 			</th>
 			<th class="text-center"></th>
 		</tr>
 	</thead>
-	<% @topics.each do |t|%>
-		<tr id="topic-<%= t.id %>">
+	<% @topics.each do |t| %>
+		<tr id="topic-<%= t.id %>"> <!-- id為了讓Ajax能鎖定要改變的位置在哪 -->
 			<td>【<%= t.category.name %>】</td>
 			<td><%= link_to t.title, topic_path(t) %></td>
 			<td>

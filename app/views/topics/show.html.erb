@@ -1,18 +1,21 @@
 <h1>【<%= @topic.category.name %>】<%= @topic.title %></h1>
+<div class="title_bar"></div>
+
+<%= link_to '', topics_path, class: "fa  fa-chevron-left btn btn-default btn-sm" %>
+<!--<%= link_to '', request.referer.present? ? request.referer : topics_path, class: "fa  fa-chevron-left btn btn-default btn-sm" %> -->
+<% if current_user && current_user.is_creator?(@topic) %>
+  <%= link_to '', edit_topic_path(@topic), class: "fa fa-pencil btn btn-primary btn-sm" %>
+<!-- 如果是從其他連結進入此頁面就會返回上一頁，其他皆導回topics_path -->
+<% end %>
 
 <h4 class="text-center">
   By : <%= @topic.user.email %>
 </h4>
 
 <p class="topic_content">
-	<%= @topic.content %>
+  <%= @topic.content %>
 </p>
 
-<% if current_user && current_user.is_creator?(@topic) %>
-  <%= link_to '', edit_topic_path(@topic), class: "fa fa-pencil btn btn-primary btn-sm" %>
-<!-- 如果是從其他連結進入此頁面就會返回上一頁，其他皆導回topics_path -->
-<% end %>
-<%= link_to '', request.referer.present? ? request.referer : topics_path, class: "fa  fa-chevron-left btn btn-default btn-sm" %>
 <hr>
 <p>
 參與回覆者：
@@ -24,17 +27,18 @@
 <div class="topic_comments">
   <ul>
     <% @topic.comments.each do |m| %>
-    <li class="comment_boxes">
+    <li id="comment-<%= m.id %>" class="comment_boxes">
       <h4><%= m.user.nickname %> (<span><%= m.user.email %></span>) </h4>
       <div class="comment_btns">
         <% if current_user && current_user.is_creator?(m) %>
           <%= link_to '', topic_path(e: m), class: "fa fa-pencil btn btn-primary btn-xs" %>
-          <%= link_to '', del_comment_topic_path(m: m), method: :delete, data: {confirm: 'Are you sure ?'}, class: "fa fa-times btn btn-danger btn-xs" %>
+          <%= link_to '', del_comment_topic_path(m: m), method: :delete, data: {confirm: 'Are you sure ?'}, class: "fa fa-times btn btn-danger btn-xs", remote: true %>
         <% end %>
       </div>
       <span class="pull-right">
         <%= m.created_at.strftime("%b %d. %Y") %>,
-        <%= m.created_at.strftime("%H:%M:%S") %>
+        <%= m.created_at.strftime("%H:%M:%S") %>(<%= time_ago_in_words(m.updated_at) %>)
+        <!-- time_ago_in_words(time) 可以記錄多久前建立(time : created_at)或多久前更新(time : updated_at) -->
       </span>
       <p><%= m.message %></p>
     </li>
