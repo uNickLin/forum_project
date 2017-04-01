@@ -19,7 +19,7 @@
 <hr>
 
 <% if @topic.is_liked_by(current_user) %>
-  <%= link_to "", unlike_topic_path(@topic), :method => :post, :class => "btn btn-primary fa fa-thumbs-up" %>
+  <%= link_to "", dislike_topic_path(@topic), :method => :post, :class => "btn btn-primary fa fa-thumbs-up" %>
 <% else %>
   <%= link_to "", like_topic_path(@topic), :method => :post, :class => "btn btn-default fa fa-thumbs-up" %>
 <% end %>

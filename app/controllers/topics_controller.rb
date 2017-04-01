@@ -173,7 +173,7 @@ class TopicsController < ApplicationController
 
   end
 
-  def unlike
+  def dislike
     like = @topic.find_like(current_user)
     like.destroy
 

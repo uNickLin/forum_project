@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   resources :topics do
   	member do # member做特定物件的事件
       post :like
-      post :unlike
+      post :dislike
       post :comments
       # put :edit_comment
       delete :del_comment
