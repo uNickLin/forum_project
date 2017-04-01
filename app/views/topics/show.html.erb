@@ -23,7 +23,9 @@
   <%= u %>,
 <% end %>
 </p>
-回覆數(<%= @topic.comments.count %>)
+<p id="comments_count">
+  回覆數(<%= @topic.comments.count %>)
+</p>
 <div class="topic_comments">
   <ul>
     <% @topic.comments.each do |m| %>

@@ -1,1 +1,3 @@
 $('#comment-<%= @comment.id %>').remove();
+
+$('#comments_count').text('回覆數(<%= @topic.comments.count %>)')
