@@ -28,8 +28,8 @@
 </p>
 <div  id="comments_list" class="topic_comments">
   <ul>
-    <% @topic.comments.each do |m| %>
-      <%= render partial: 'commentsXD', locals: {m: m} %>
+    <% @comments.each do |m| %>
+      <%= render partial: 'comments', locals: {m: m} %>
     <% end %>
   </ul>
 </div>

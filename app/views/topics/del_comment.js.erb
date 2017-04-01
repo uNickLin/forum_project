@@ -1,3 +1,4 @@
-$('#comment-<%= @comment.id %>').remove();
-
-$('#comments_count').text('回覆數(<%= @topic.comments.count %>)')
+$('#comment-<%= @comment.id %>').css('animation', 'bounceOut 1s both');
+$('#comment-<%= @comment.id %>').empty();
+$('#comments_count').text('回覆數(<%= @topic.comments.count %>)');
+// $('#comment-<%= @comment.id %>').remove();

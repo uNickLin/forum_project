@@ -65,9 +65,15 @@ class TopicsController < ApplicationController
 	def show
     if params[:e]
       @comment = @topic.comments.find(params[:e])
+
+      # respond_to do |format|
+      #   format.js
+      #   format.html {redirect_to topic_path(@topic)}
+      # end
+
     else
 		  @comment = Comment.new
-		  @comments = Comment.order("message desc")
+		  @comments = @topic.comments.order("created_at desc")
     end
 
 	end
@@ -105,10 +111,13 @@ class TopicsController < ApplicationController
 		 if params[:m]
 
       @comment = @topic.comments.find(params[:m])
-
       @comment.update(comment_params)
 
-       redirect_to topic_path(@topic)
+      # respond_to do |format|
+      #   format.js
+      #   format.html {redirect_to topic_path(@topic)}
+      # end
+
     else
 
       @comment = @topic.comments.new(comment_params)
@@ -117,7 +126,7 @@ class TopicsController < ApplicationController
         @topic.latest_comment_time = @topic.comments.last
         @topic.comments_num = @topic.comments.count
         @topic.save
-        # redirect_to topic_path(@topic)
+
         respond_to do |format|
           format.js
           format.html {redirect_to topic_path(@topic)}
