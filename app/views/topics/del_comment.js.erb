@@ -1,4 +1,17 @@
-$('#comment-<%= @comment.id %>').css('animation', 'bounceOut 1s both');
-$('#comment-<%= @comment.id %>').empty();
+$('#comment-<%= @comment.id %>').animate({
+    height: "0px"
+  }, 500, function() {
+
+      $( "#comment-<%= @comment.id %>" ).remove();
+})
+
+// $('#comment-<%= @comment.id %>').css({
+//   'animation': 'bounceOut 1s both',
+//   'padding': 0,
+//   'margin': 0,
+// }, 1000, function(){
+//   $("#comment-<%= @comment.id %>").remove().parent('ul').css('height', 'initial');
+
+// });
+
 $('#comments_count').text('回覆數(<%= @topic.comments.count %>)');
-// $('#comment-<%= @comment.id %>').remove();
