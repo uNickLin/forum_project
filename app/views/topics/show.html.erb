@@ -18,13 +18,11 @@
 
 <hr>
 
-<% if @topic.is_liked_by(current_user) %>
-  <%= link_to "", dislike_topic_path(@topic), :method => :post, :class => "btn btn-primary fa fa-thumbs-up" %>
-<% else %>
-  <%= link_to "", like_topic_path(@topic), :method => :post, :class => "btn btn-default fa fa-thumbs-up" %>
-<% end %>
+<div id="like_btn">
+  <%= render partial: "like" %>
+</div>
 
-<h6>
+<h6 id="who_likes">
   Who also like this(<%= @topic.likes.count %>) : <% @topic.liked_users.each do |like_user| %>
     <%= like_user.nickname %>
   <% end %>

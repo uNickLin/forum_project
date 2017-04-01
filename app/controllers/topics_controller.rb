@@ -169,7 +169,11 @@ class TopicsController < ApplicationController
     unless @topic.is_liked_by(current_user)
       Like.create( topic: @topic, user: current_user )
     end
-    redirect_to topic_path(@topic)
+
+    respond_to do |format|
+      format.js
+      format.html { redirect_to topic_path(@topic) }
+    end
 
   end
 
@@ -177,7 +181,11 @@ class TopicsController < ApplicationController
     like = @topic.find_like(current_user)
     like.destroy
 
-    redirect_to topic_path(@topic)
+    respond_to do |format|
+      format.js {render :like}
+      format.html { redirect_to topic_path(@topic) }
+    end
+
   end
 
 
