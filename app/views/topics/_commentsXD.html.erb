@@ -1,0 +1,15 @@
+<li id="comment-<%= m.id %>" class="comment_boxes">
+  <h4><%= m.user.nickname %> (<span><%= m.user.email %></span>) </h4>
+  <div class="comment_btns">
+    <% if current_user && current_user.is_creator?(m) %>
+      <%= link_to '', topic_path(e: m), class: "fa fa-pencil btn btn-primary btn-xs" %>
+      <%= link_to '', del_comment_topic_path(m: m), method: :delete, data: {confirm: 'Are you sure ?'}, class: "fa fa-times btn btn-danger btn-xs", remote: true %>
+    <% end %>
+  </div>
+  <span class="pull-right">
+    <%= m.created_at.strftime("%b %d. %Y") %>,
+    <%= m.created_at.strftime("%H:%M:%S") %>(<%= time_ago_in_words(m.updated_at) %>)
+    <!-- time_ago_in_words(time) 可以記錄多久前建立(time : created_at)或多久前更新(time : updated_at) -->
+  </span>
+  <p><%= m.message %></p>
+</li>

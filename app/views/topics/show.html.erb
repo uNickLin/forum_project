@@ -26,29 +26,15 @@
 <p id="comments_count">
   回覆數(<%= @topic.comments.count %>)
 </p>
-<div class="topic_comments">
+<div  id="comments_list" class="topic_comments">
   <ul>
     <% @topic.comments.each do |m| %>
-    <li id="comment-<%= m.id %>" class="comment_boxes">
-      <h4><%= m.user.nickname %> (<span><%= m.user.email %></span>) </h4>
-      <div class="comment_btns">
-        <% if current_user && current_user.is_creator?(m) %>
-          <%= link_to '', topic_path(e: m), class: "fa fa-pencil btn btn-primary btn-xs" %>
-          <%= link_to '', del_comment_topic_path(m: m), method: :delete, data: {confirm: 'Are you sure ?'}, class: "fa fa-times btn btn-danger btn-xs", remote: true %>
-        <% end %>
-      </div>
-      <span class="pull-right">
-        <%= m.created_at.strftime("%b %d. %Y") %>,
-        <%= m.created_at.strftime("%H:%M:%S") %>(<%= time_ago_in_words(m.updated_at) %>)
-        <!-- time_ago_in_words(time) 可以記錄多久前建立(time : created_at)或多久前更新(time : updated_at) -->
-      </span>
-      <p><%= m.message %></p>
-    </li>
+      <%= render partial: 'commentsXD', locals: {m: m} %>
     <% end %>
   </ul>
 </div>
 
-<%= simple_form_for @comment, url:comments_topic_path(@topic,m: @comment), method: :post  do |n| %>
+<%= simple_form_for @comment,  url:comments_topic_path(@topic,m: @comment), method: :post,remote: true  do |n| %>
 <!-- url:comments_topic_path(@topic,m: @comment)後面的m: @comment是在編輯時會把帶進來的文字給一個key m
      好讓controller中的def comments 可以辨識這是新的留言還是編輯舊的留言 -->
   <div class="form-group">

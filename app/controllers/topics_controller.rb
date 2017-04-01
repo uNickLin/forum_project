@@ -67,7 +67,7 @@ class TopicsController < ApplicationController
       @comment = @topic.comments.find(params[:e])
     else
 		  @comment = Comment.new
-		  @comments = Comment.order("created_at desc")
+		  @comments = Comment.order("message desc")
     end
 
 	end
@@ -101,6 +101,7 @@ class TopicsController < ApplicationController
 
 	def comments
 
+
 		 if params[:m]
 
       @comment = @topic.comments.find(params[:m])
@@ -116,12 +117,18 @@ class TopicsController < ApplicationController
         @topic.latest_comment_time = @topic.comments.last
         @topic.comments_num = @topic.comments.count
         @topic.save
-        redirect_to topic_path(@topic)
+        # redirect_to topic_path(@topic)
+        respond_to do |format|
+          format.js
+          format.html {redirect_to topic_path(@topic)}
+        end
+
       else
         render :show
 
       end
     end
+
 
 	end
 
