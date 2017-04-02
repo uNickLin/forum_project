@@ -2,13 +2,13 @@
 
 <div class="seachbar text-center">
 	<p>
-	  <%= form_tag topics_path, remote: true, method: :get do %>
+	  <%= form_tag topics_path, method: :get do %>
 	    <%= text_field_tag "keyword" %>
 	    <%= submit_tag 'Search', class: "fa fa-search btn btn-warning btn-sm" %>
 	    <%= link_to 'Cancel Search', topics_path, class: 'btn btn-default btn-sm' %>
 	  <% end %>
  	<p>
-	  <%= form_tag topics_path, remote: true, method: :get do %>
+	  <%= form_tag topics_path, method: :get do %>
 	    <%= select_tag "category", options_from_collection_for_select(Category.all, "name", "name", params[:category]), onchange: 'this.form.submit()', prompt: "ALL" %>
 	  <!-- 第一個name是指要回傳的參數，第二個name是指要顯示在選項上的欄位為name -->
 	  <!-- category = Category.find_by(name: params[:category]) if params[:category]中的name即對應上述第一個回傳參數 -->
@@ -32,59 +32,59 @@
 			<th class="text-center">分類</th>
 			<th class="text-center">標題</th>
 			<th class="text-center">作者</th>
-			<th class="text-center">LIKE</th>
+			<th class="text-center">LIKES</th>
 			<th class="text-center">
-				<%= link_to image_tag("up_arrow.svg", width: 25, border: 0), topics_path(comments_sort: :comments_up), remote: true %>
+				<%= link_to image_tag("up_arrow.svg", width: 25, border: 0), topics_path(comments_sort: :comments_up) %>
 				留言數
-				<%= link_to image_tag("down_arrow.svg", width: 25, border: 0), topics_path(comments_sort: :comments_down), remote: true %>
+				<%= link_to image_tag("down_arrow.svg", width: 25, border: 0), topics_path(comments_sort: :comments_down) %>
 			</th>
 			<th class="text-center">
-				<%= link_to image_tag("up_arrow.svg", width: 25, border: 0), topics_path(post_sort: :post_up), remote: true %>
+				<%= link_to image_tag("up_arrow.svg", width: 25, border: 0), topics_path(post_sort: :post_up) %>
 				建立日期
-				<%= link_to image_tag("down_arrow.svg", width: 25, border: 0), topics_path(post_sort: :post_down), remote: true %>
+				<%= link_to image_tag("down_arrow.svg", width: 25, border: 0), topics_path(post_sort: :post_down) %>
 			</th>
 			<th class="text-center">
-				<%= link_to image_tag("up_arrow.svg", width: 25, border: 0), topics_path(latest_comment_sort: :latest_comment_up), remote: true %>
+				<%= link_to image_tag("up_arrow.svg", width: 25, border: 0), topics_path(latest_comment_sort: :latest_comment_up) %>
 				最新回覆
-				<%= link_to image_tag("down_arrow.svg", width: 25, border: 0), topics_path(latest_comment_sort: :latest_comment_down), remote: true %>
+				<%= link_to image_tag("down_arrow.svg", width: 25, border: 0), topics_path(latest_comment_sort: :latest_comment_down) %>
 			</th>
 			<th class="text-center"></th>
 		</tr>
 	</thead>
-	<% @topics.each do |t| %>
-		<tr id="topic-<%= t.id %>"> <!-- id為了讓Ajax能鎖定要改變的位置在哪 -->
-			<td>【<%= t.category.name %>】</td>
-			<td><%= link_to t.title, topic_path(t) %></td>
+	<% @topics.each do |topic| %>
+		<tr id="topic-<%= topic.id %>"> <!-- id為了讓Ajax能鎖定要改變的位置在哪 -->
+			<td>【<%= topic.category.name %>】</td>
+			<td><%= link_to topic.title, topic_path(topic) %></td>
 			<td>
-				<%= t.user.nickname %><br>
-				(<%= t.user.email %>)
+				<%= topic.user.nickname %><br>
+				(<%= topic.user.email %>)
 			</td>
 			<td>
-				<%= t.likes.count %>
+				<%= topic.likes.count %>
 			</td>
 			<td>
-				<% if t.comments_num %>
-					<div class="comments_count"><%= t.comments_num %></div>
+				<% if topic.comments_num %>
+					<div class="comments_count"><%= topic.comments_num %></div>
 				<% else %>
 					<div class="comments_count">0</div>
 				<% end %>
 			</td>
 			<td>
-				<%= t.created_at.strftime("%b %d. %Y") %><br>
-				<%= t.created_at.strftime("%H:%M:%S") %>
+				<%= topic.created_at.strftime("%b %d. %Y") %><br>
+				<%= topic.created_at.strftime("%H:%M:%S") %>
 			</td>
 			<td>
-				<% if(t.comments.any?) %>
-					<%= t.comments.last.created_at.strftime("%b %d. %Y") %><br>
-					<%= t.comments.last.created_at.strftime("%H:%M:%S") %>
+				<% if(topic.comments.any?) %>
+					<%= topic.comments.last.created_at.strftime("%b %d. %Y") %><br>
+					<%= topic.comments.last.created_at.strftime("%H:%M:%S") %>
 				<% else %>
 					-
 				<% end %>
 			</td>
 			<td>
-				<% if current_user && current_user.is_creator?(t) %>
-					<%= link_to '', edit_topic_path(t), class: "fa fa-pencil btn btn-primary btn-sm" %>
-					<%= link_to '', topic_path(t), class: "fa fa-times btn btn-danger btn-sm", method: :delete, data: {confirm: 'Are you sure ?'}, remote: true %>
+				<% if current_user && current_user.is_creator?(topic) %>
+					<%= link_to '', edit_topic_path(topic), class: "fa fa-pencil btn btn-primary btn-sm" %>
+					<%= link_to '', topic_path(topic), class: "fa fa-times btn btn-danger btn-sm", method: :delete, data: {confirm: 'Are you sure ?'}, remote: true %>
 				<% end %>
 			</td>
 		</tr>

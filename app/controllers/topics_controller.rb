@@ -63,17 +63,19 @@ class TopicsController < ApplicationController
 	end
 
 	def show
-    if params[:e]
-      @comment = @topic.comments.find(params[:e])
+    @comments = @topic.comments.order("created_at desc")
 
-      # respond_to do |format|
-      #   format.js
-      #   format.html {redirect_to topic_path(@topic)}
-      # end
+    if params[:edit_comment_in_topic]
+      @comment = @topic.comments.find(params[:edit_comment_in_topic])
+
+      respond_to do |format|
+        format.js
+        format.html {redirect_to topic_path(@topic)}
+      end
 
     else
 		  @comment = Comment.new
-		  @comments = @topic.comments.order("created_at desc")
+
     end
 
 	end
@@ -106,17 +108,15 @@ class TopicsController < ApplicationController
 	end
 
 	def comments
+		 if params[:edit_comment_in_topic]
 
-
-		 if params[:m]
-
-      @comment = @topic.comments.find(params[:m])
+      @comment = @topic.comments.find(params[:edit_comment_in_topic])
       @comment.update(comment_params)
 
-      # respond_to do |format|
-      #   format.js
-      #   format.html {redirect_to topic_path(@topic)}
-      # end
+      respond_to do |format|
+        format.js
+        format.html {redirect_to topic_path(@topic)}
+      end
 
     else
 
@@ -146,8 +146,8 @@ class TopicsController < ApplicationController
   end
 
   def del_comment
-    if params[:m]
-      @comment = current_user.comments.find(params[:m])
+    if params[:del_comment_in_topic]
+      @comment = current_user.comments.find(params[:del_comment_in_topic])
       @comment.destroy
 
       respond_to do |format|
@@ -155,8 +155,8 @@ class TopicsController < ApplicationController
         format.html {redirect_to topic_path(@topic)}
       end
 
-    elsif params[:c]
-      @comment = current_user.comments.find(params[:c])
+    elsif params[:del_comment_in_my_posts]
+      @comment = current_user.comments.find(params[:del_comment_in_my_posts])
       @comment.destroy
 
       redirect_to my_posts_users_path

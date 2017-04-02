@@ -62,14 +62,14 @@
   <div class="title_bar"></div>
   <div class="my_view_box">
     <ul>
-      <% @my_comments.each do |c| %>
+      <% @my_comments.each do |comment| %>
         <li class="col-sm-4">
           <div class="my_comments_box">
-            <h4 class="text-center">【<%= c.topic.category.name %>】<%= c.topic.title %></h4>
-            <h6 class="text-center"><%= c.created_at.strftime("%b %d. %Y, %H:%M:%S") %></h6>
-            <p><%= c.message %></p>
-            <%= link_to '', topic_path(c.topic), class: "fa fa-search-plus btn btn-warning btn-xs my_read_more" %>
-            <%= link_to '', del_comment_topic_path(id: c.topic_id, c: c), method: :delete, data: {confirm: 'Are you sure ?'}, class: "fa fa-times btn btn-danger btn-xs my_delete" %>
+            <h4 class="text-center">【<%= comment.topic.category.name %>】<%= comment.topic.title %></h4>
+            <h6 class="text-center"><%= comment.created_at.strftime("%b %d. %Y, %H:%M:%S") %></h6>
+            <p><%= comment.message %></p>
+            <%= link_to '', topic_path(comment.topic), class: "fa fa-search-plus btn btn-warning btn-xs my_read_more" %>
+            <%= link_to '', del_comment_topic_path(id: comment.topic_id, del_comment_in_my_posts: comment), method: :delete, data: {confirm: 'Are you sure ?'}, class: "fa fa-times btn btn-danger btn-xs my_delete" %>
             <!-- @my_comments = current_user.comments.order("created_at desc") -->
           </div>
         </li>

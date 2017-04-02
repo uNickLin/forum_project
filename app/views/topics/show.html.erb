@@ -38,17 +38,17 @@
 </p>
 
 <p id="comments_count">
-  回覆數(<%= @topic.comments.count %>)
+  回覆數(<%= @comments.count %>)
 </p>
 <div  id="comments_list" class="topic_comments">
   <ul>
-    <% @comments.each do |m| %>
-      <%= render partial: 'comments', locals: {m: m} %>
+    <% @comments.each do |comment| %>
+      <%= render partial: 'comments', locals: {comment: comment} %>
     <% end %>
   </ul>
 </div>
 
-<%= simple_form_for @comment,  url:comments_topic_path(@topic,m: @comment), method: :post,remote: true  do |n| %>
+<%= simple_form_for @comment,  url:comments_topic_path(@topic,comment: @comment), method: :post,remote: true  do |n| %>
 <!-- url:comments_topic_path(@topic,m: @comment)後面的m: @comment是在編輯時會把帶進來的文字給一個key m
      好讓controller中的def comments 可以辨識這是新的留言還是編輯舊的留言 -->
   <div class="form-group">
