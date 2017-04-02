@@ -4,5 +4,5 @@ $("#like_btn").html(str);
 
 $("#who_likes").text('Who also like this(<%= @topic.likes.count %>) : \
                       <% @topic.liked_users.each do |like_user| %>\
-                        <%= like_user.nickname %>\
+                        <%= like_user.nickname %>,\
                       <% end %>')

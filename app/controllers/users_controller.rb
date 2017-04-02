@@ -12,7 +12,8 @@ class UsersController < ApplicationController
 
   end
 
-  def my_collection
+  def my_collections
+    @my_likes = current_user.likes.page(params[:page]).per(5)
 
   end
 

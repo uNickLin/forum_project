@@ -1,0 +1,51 @@
+<div class="my_profile_btns text-center">
+  <%= link_to 'My profile', users_path, class: "btn btn-warning" %>
+  <%= link_to 'My Posts', my_posts_users_path, class: "btn btn-warning" %>
+  <%= link_to 'My Collection', my_collections_users_path, class: "btn btn-warning" %>
+</div>
+
+<h1 class="text-center">My likes</h1>
+<div class="title_bar"></div>
+<hr>
+<div class="paginate text-center">
+  <%= paginate @my_likes %>
+</div>
+<div class="my_posts">
+  <div class="my_view_box">
+    <table class="table table-hover text-center">
+      <thead>
+        <tr>
+          <th class="text-center">分類</th>
+          <th class="text-center">標題</th>
+          <th class="text-center">
+            留言數
+            <!-- Sorting guide => http://railscasts.com/episodes/228-sortable-table-columns?view=asciicast -->
+          </th>
+          <th class="text-center">建立日期</th>
+          <th class="text-center">最新回覆</th>
+        </tr>
+      </thead>
+      <% @my_likes.each do |t|%>
+        <tr>
+          <td>【<%= t.topic.category.name %>】</td>
+          <td><%= link_to t.topic.title, topic_path(t.topic) %></td>
+          <td>
+            <div class="comments_count"><%= t.topic.comments.count %></div>
+          </td>
+          <td>
+            <%= t.topic.created_at.strftime("%b %d. %Y") %><br>
+            <%= t.topic.created_at.strftime("%H:%M:%S") %>
+          </td>
+          <td>
+            <% if(t.topic.comments.any?) %>
+              <%= t.topic.comments.last.created_at.strftime("%b %d. %Y") %><br>
+              <%= t.topic.comments.last.created_at.strftime("%H:%M:%S") %>
+            <% else %>
+              -
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+</div>

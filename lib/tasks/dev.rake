@@ -4,6 +4,7 @@ namespace :dev do
     User.destroy_all
     Topic.destroy_all
     Comment.destroy_all
+    Like.destroy_all
 
     user = User.create!( email: 'ac01@alpha.com',
                          password: '111111',
@@ -27,17 +28,26 @@ namespace :dev do
                      :user_id => User.all.sample.id,
                      :category_id => Category.all.sample.id)
 
-      rand(10).times do #隨機在每篇文章中隨機產生0-10則的留言，且個別屬於隨機一名使用者
+      rand(10).times do #每次隨機產生0-10則的留言，且個別屬於隨機一名使用者
         Comment.create!( :user => User.all.sample,
                          :topic => topic,
                          :message => Faker::Lorem.sentence)
       end
     end
 
+
     Topic.all.each do |c|
-        c.comments_num = c.comments.count
-        c.latest_comment_time = c.comments.last
-        c.save
+      c.comments_num = c.comments.count
+      c.latest_comment_time = c.comments.last
+      c.save
+
+      User.all.each do |u|
+        rand(2).times do
+          Like.create!( user: u,
+                        topic: c)
+        end
+      end
     end
+
   end
 end

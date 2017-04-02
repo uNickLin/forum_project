@@ -32,6 +32,7 @@
 			<th class="text-center">分類</th>
 			<th class="text-center">標題</th>
 			<th class="text-center">作者</th>
+			<th class="text-center">LIKE</th>
 			<th class="text-center">
 				<%= link_to image_tag("up_arrow.svg", width: 25, border: 0), topics_path(comments_sort: :comments_up), remote: true %>
 				留言數
@@ -57,6 +58,9 @@
 			<td>
 				<%= t.user.nickname %><br>
 				(<%= t.user.email %>)
+			</td>
+			<td>
+				<%= t.likes.count %>
 			</td>
 			<td>
 				<% if t.comments_num %>

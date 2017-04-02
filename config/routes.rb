@@ -19,7 +19,7 @@ Rails.application.routes.draw do
   resources :users do
     collection do # collection做所有物件的事件（不指定id）
       get :my_posts
-      get :my_collection
+      get :my_collections
       delete :del_my_post
     end
   end
