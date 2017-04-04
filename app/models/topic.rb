@@ -12,6 +12,7 @@ class Topic < ApplicationRecord
   has_many :liked_users, through: :likes, source: :user
 
   has_many :pictures, dependent: :destroy
+  accepts_nested_attributes_for :pictures
 
   def group_by_comments_users(topic)
     comments_users = []

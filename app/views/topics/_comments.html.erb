@@ -12,4 +12,7 @@
     <!-- time_ago_in_words(time) 可以記錄多久前建立(time : created_at)或多久前更新(time : updated_at) -->
   </span>
   <p><%= comment.message %></p>
+  <% if comment.pictures.any? %>
+    <p><%= image_tag "/#{comment.pictures.first}" %></p>
+  <% end %>
 </li>

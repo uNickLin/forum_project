@@ -10,6 +10,7 @@
 <% else %>
   li = "<%=j render :partial => "comments", :locals => { :comment => @comment } %>"
   $('textarea').val("");
+  $('#comments_list').scrollTop($('#comments_list ul:first-child').position().top)
   $('#comments_list ul').prepend(li);
   $('#comments_list li:first-child').css('animation', 'rubberBand 1s both');
 

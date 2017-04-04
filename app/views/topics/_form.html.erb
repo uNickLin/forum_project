@@ -4,6 +4,11 @@
 		<ul>
 			<li><%= n.input :title, input_html: { class: "form-control"} %></li>
 			<li>類別：<%= n.collection_select(:category_id, Category.all, :id, :name, prompt: "請選擇分類") %></li>
+      <li>上傳圖片 ：
+        <%= n.simple_fields_for :pictures do |l| %>
+          <%= l.input :image, as: :file %>
+        <% end %>
+      </li>
 		  <li><%= n.input :content, input_html: { class: "form-control"} %></li>
 		</ul>
 	</div>

@@ -15,6 +15,11 @@
 <p class="topic_content">
   <%= @topic.content %>
 </p>
+<p class="topic_image">
+  <% if @topic.pictures.any? %>
+    <%= image_tag "/#{@topic.pictures.first}" %>
+  <% end %>
+</p>
 
 <hr>
 
@@ -48,11 +53,16 @@
   </ul>
 </div>
 
-<%= simple_form_for @comment,  url:comments_topic_path(@topic,comment: @comment), method: :post,remote: true  do |n| %>
+<%= simple_form_for @comment, url:comments_topic_path(@topic,comment: @comment), method: :post,remote: true  do |n| %>
 <!-- url:comments_topic_path(@topic,m: @comment)後面的m: @comment是在編輯時會把帶進來的文字給一個key m
      好讓controller中的def comments 可以辨識這是新的留言還是編輯舊的留言 -->
   <div class="form-group">
     <%= n.input :message, input_html: { class: "form-control"} %>
+  </div>
+  <div class="comment_upload">
+    <%= n.fields_for :picture do |l| %>
+      <%= l.file_field :image %>
+    <% end %>
   </div>
   <%= n.submit 'Post comment', class: "btn btn-success btn-sm" %>
 <% end %>

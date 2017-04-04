@@ -47,13 +47,18 @@ class TopicsController < ApplicationController
 
 	def new
 		@topic = Topic.new
+    @picture = @topic.pictrues.new
 
 	end
 
 	def create
 		@topic = Topic.new(topic_params)
 		@topic.user = current_user
+
+    @picture = @topic.pictures.new(picture_params)
+
 		if @topic.save
+      @picture.save
 			redirect_to topics_path
 			flash[:notice] = "新增成功！"
 		else
@@ -64,6 +69,7 @@ class TopicsController < ApplicationController
 
 	def show
     @comments = @topic.comments.order("created_at desc")
+
 
     if params[:edit_comment_in_topic]
       @comment = @topic.comments.find(params[:edit_comment_in_topic])
@@ -193,13 +199,17 @@ class TopicsController < ApplicationController
 	private
 
 	def topic_params
-		params.require(:topic).permit(:title, :content, :category_id, :user_id, :latest_comment_time, :comments_num, :picture)
+		params.require(:topic).permit(:title, :content, :category_id, :user_id, :latest_comment_time, :comments_num, pictures_attributes: [:image])
 
 	end
 
 	def comment_params
-		params.require(:comment).permit(:message, :topic_id, :user_id)
+		params.require(:comment).permit(:message, :topic_id, :user_id, pictures_attributes: [:image])
 	end
+
+  def picture_params
+    params.require(:picture).permit(:topic_id, :comment_id, :image)
+  end
 
 	def find_topic
 		@topic = Topic.find(params[:id])
