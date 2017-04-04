@@ -8,8 +8,10 @@ class Topic < ApplicationRecord
 
 	has_many :comments, dependent: :destroy
 
-  has_many :likes, :dependent => :destroy
-  has_many :liked_users, :through => :likes, :source => :user
+  has_many :likes, dependent: :destroy
+  has_many :liked_users, through: :likes, source: :user
+
+  has_many :pictures, dependent: :destroy
 
   def group_by_comments_users(topic)
     comments_users = []

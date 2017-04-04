@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170401132138) do
+ActiveRecord::Schema.define(version: 20170404023557) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name"
@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(version: 20170401132138) do
     t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "picture_id"
   end
 
   create_table "likes", force: :cascade do |t|
@@ -33,6 +34,14 @@ ActiveRecord::Schema.define(version: 20170401132138) do
     t.datetime "updated_at", null: false
     t.index ["topic_id"], name: "index_likes_on_topic_id"
     t.index ["user_id"], name: "index_likes_on_user_id"
+  end
+
+  create_table "pictures", force: :cascade do |t|
+    t.string   "image"
+    t.integer  "topic_id"
+    t.integer  "comment_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "topics", force: :cascade do |t|
@@ -45,6 +54,7 @@ ActiveRecord::Schema.define(version: 20170401132138) do
     t.integer  "latest_comment"
     t.integer  "comments_num"
     t.date     "latest_comment_time"
+    t.integer  "picture_id"
   end
 
   create_table "users", force: :cascade do |t|

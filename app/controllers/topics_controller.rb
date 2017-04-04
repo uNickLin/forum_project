@@ -193,7 +193,7 @@ class TopicsController < ApplicationController
 	private
 
 	def topic_params
-		params.require(:topic).permit(:title, :content, :category_id, :user_id, :latest_comment_time, :comments_num)
+		params.require(:topic).permit(:title, :content, :category_id, :user_id, :latest_comment_time, :comments_num, :picture)
 
 	end
 

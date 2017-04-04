@@ -3,4 +3,6 @@ class Comment < ApplicationRecord
 
 	belongs_to :user
 	belongs_to :topic
+
+  has_many :pictures, dependent: :destroy
 end
