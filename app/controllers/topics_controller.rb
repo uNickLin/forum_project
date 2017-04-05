@@ -65,7 +65,7 @@ class TopicsController < ApplicationController
 	end
 
 	def show
-    @comments = @topic.comments.order("created_at desc")
+    @comments = @topic.comments.order("created_at asc")
 
     if params[:edit_comment_in_topic]
       @comment = @topic.comments.find(params[:edit_comment_in_topic])

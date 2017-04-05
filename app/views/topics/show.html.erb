@@ -41,7 +41,7 @@
 
 <p id="comments_users">
   參與回覆者：
-  <% @topic.group_by_comments_users(@topic).each do |u| %>
+  <% @topic.group_by_comments_users.each do |u| %>
     <%= u %>,
   <% end %>
 </p>
@@ -57,13 +57,14 @@
   </ul>
 </div>
 
-<%= simple_form_for @comment, url:comments_topic_path(@topic,comment: @comment), method: :post,remote: true  do |n| %>
+<%= simple_form_for @comment, url:comments_topic_path(@topic,comment: @comment), method: :post,remote: true, authenticity_token: true do |n| %>
 <!-- url:comments_topic_path(@topic,m: @comment)後面的m: @comment是在編輯時會把帶進來的文字給一個key m
      好讓controller中的def comments 可以辨識這是新的留言還是編輯舊的留言 -->
   <div class="form-group">
     <%= n.input :message, input_html: { class: "form-control"} %>
   </div>
   <div class="comment_upload">
+    <input name="authenticity_token" type="hidden" value="some_long_random_string" />
     <%= n.simple_fields_for :pictures do |l| %>
       <%= l.input :image, as: :file %>
     <% end %>

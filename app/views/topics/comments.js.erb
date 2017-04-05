@@ -10,13 +10,11 @@
 <% else %>
   li = "<%=j render :partial => "comments", :locals => { :comment => @comment } %>"
   $('textarea').val("");
-  $('#comments_list').scrollTop($('#comments_list ul:first-child').position().top)
-  $('#comments_list ul').prepend(li);
-  $('#comments_list li:first-child').css('animation', 'rubberBand 1s both');
-
-
-  // $('#comments_list').scrollTop($('#comments_list ul:last-child').position().top)
-  <!-- 上行是指當新增的li在最底下時, 每次新增後會把scroll bar拉到最底下, 讓使用者可以立刻看到自己的回覆 -->
-  // $('ul:last-child').addClass('animated rubberBand') css('animation', 'rubberBand 1s 0.1s')
+  // $('#comments_list').scrollTop($('#comments_list ul:first-child').offset().top);
+  $('#comments_list ul').append(li);
+  $('#comments_list li:last-child').css('animation', 'rubberBand 1s both');
+  $('#comments_list').animate({
+      scrollTop: $('#comments_list li').position().top
+    });
 
 <% end %>

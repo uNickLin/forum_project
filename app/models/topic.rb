@@ -14,9 +14,9 @@ class Topic < ApplicationRecord
   has_many :pictures, dependent: :destroy
   accepts_nested_attributes_for :pictures
 
-  def group_by_comments_users(topic)
+  def group_by_comments_users
     comments_users = []
-    topic.comments.each do |j|
+    self.comments.each do |j|
       comments_users << j.user.nickname
     end
 
