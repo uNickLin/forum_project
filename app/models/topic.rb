@@ -35,11 +35,11 @@ class Topic < ApplicationRecord
   end
 
   def find_collection(user)
-    Colection.where( :topic_id => self.id, :user_id => user.id ).first
+    Collection.where( :topic_id => self.id, :user_id => user.id ).first
   end
 
   def is_collected_by(user)
-    find_colection(user).present?
+    find_collection(user).present?
   end
 
 

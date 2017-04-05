@@ -193,8 +193,9 @@ class TopicsController < ApplicationController
   end
 
   def add_collection
-    unless @topic.is_collecteded_by(current_user)
-      Collection.create( topic: @topic, user: current_user )
+    unless @topic.is_collected_by(current_user)
+      Collection.create( topic_id: @topic.id, user_id: current_user.id )
+
     end
 
     respond_to do |format|
