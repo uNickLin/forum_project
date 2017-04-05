@@ -70,10 +70,10 @@ class TopicsController < ApplicationController
     if params[:edit_comment_in_topic]
       @comment = @topic.comments.find(params[:edit_comment_in_topic])
 
-      respond_to do |format|
-        format.js
-        format.html {redirect_to topic_path(@topic)}
-      end
+      # respond_to do |format|
+      #   format.js
+      #   format.html {render :show}
+      # end
 
     else
 		  @comment = Comment.new
@@ -85,6 +85,8 @@ class TopicsController < ApplicationController
 
 	def edit
     # @picture = @topic.pictures.find(params[:image])
+    @picture = @topic.pictures.new
+
 	end
 
 	def update
@@ -112,10 +114,10 @@ class TopicsController < ApplicationController
 
 	def comments
 		 if params[:edit_comment_in_topic]
-
       @comment = @topic.comments.find(params[:edit_comment_in_topic])
       @comment.update(comment_params)
 
+      # redirect_to topic_path(@topic)
       respond_to do |format|
         format.js
         format.html {redirect_to topic_path(@topic)}

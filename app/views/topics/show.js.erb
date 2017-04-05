@@ -1,2 +1,1 @@
-// alert('Success !')
-$('textarea').val("<%= @comment.message %>")
+  $('textarea').val($('#comment-<%= @comment.id %> p').text())

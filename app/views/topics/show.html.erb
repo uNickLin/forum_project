@@ -1,54 +1,57 @@
-<h1>【<%= @topic.category.name %>】<%= @topic.title %></h1>
-<div class="title_bar"></div>
+ <div class="topic-container">
+  <h1>【<%= @topic.category.name %>】<%= @topic.title %></h1>
+  <div class="title_bar"></div>
 
-<%= link_to '', topics_path, class: "fa  fa-chevron-left btn btn-default btn-sm" %>
-<!--<%= link_to '', request.referer.present? ? request.referer : topics_path, class: "fa  fa-chevron-left btn btn-default btn-sm" %> -->
-<% if current_user && current_user.is_creator?(@topic) %>
-  <%= link_to '', edit_topic_path(@topic, image: :picture), class: "fa fa-pencil btn btn-primary btn-sm" %>
-<!-- 如果是從其他連結進入此頁面就會返回上一頁，其他皆導回topics_path -->
-<% end %>
-
-<h4 class="text-center">
-  By : <%= @topic.user.email %>
-</h4>
-
-<p class="topic_content">
-  <%= @topic.content %>
-</p>
-<p class="topic_image">
-  <% if @topic.pictures.any? %>
-    <% @topic.pictures.each do |picture| %>
-      <%= image_tag picture.image.thumb.url %>
-    <% end %>
-  <% else %>
-    <%= image_tag "" %>
+  <%= link_to '', topics_path, class: "fa  fa-chevron-left btn btn-default btn-sm" %>
+  <!--<%= link_to '', request.referer.present? ? request.referer : topics_path, class: "fa  fa-chevron-left btn btn-default btn-sm" %> -->
+  <% if current_user && current_user.is_creator?(@topic) %>
+    <%= link_to '', edit_topic_path(@topic, image: :picture), class: "fa fa-pencil btn btn-primary btn-sm" %>
+  <!-- 如果是從其他連結進入此頁面就會返回上一頁，其他皆導回topics_path -->
   <% end %>
-</p>
 
-<hr>
+  <h4 class="text-center">
+    By : <%= @topic.user.email %>
+  </h4>
 
-<div id="like_btn">
-  <%= render partial: "like" %>
+  <p class="topic_content">
+    <%= @topic.content %>
+  </p>
+  <p class="topic_image">
+    <% if @topic.pictures.any? %>
+      <% @topic.pictures.each do |picture| %>
+        <%= image_tag picture.image.thumb.url %>
+      <% end %>
+    <% else %>
+      <%= image_tag "" %>
+    <% end %>
+  </p>
+
+  <hr>
+
+  <div id="like_btn">
+    <%= render partial: "like" %>
+  </div>
+
+  <h6 id="who_likes">
+    Who also like this(<%= @topic.likes.count %>) : <% @topic.liked_users.each do |like_user| %>
+      <%= like_user.nickname %>,
+    <% end %>
+  </h6>
+
+  <hr>
+
+  <p id="comments_users">
+    參與回覆者：
+    <% @topic.group_by_comments_users.each do |u| %>
+      <%= u %>,
+    <% end %>
+  </p>
+
+  <p id="comments_count">
+    回覆數(<%= @comments.count %>)
+  </p>
 </div>
 
-<h6 id="who_likes">
-  Who also like this(<%= @topic.likes.count %>) : <% @topic.liked_users.each do |like_user| %>
-    <%= like_user.nickname %>,
-  <% end %>
-</h6>
-
-<hr>
-
-<p id="comments_users">
-  參與回覆者：
-  <% @topic.group_by_comments_users.each do |u| %>
-    <%= u %>,
-  <% end %>
-</p>
-
-<p id="comments_count">
-  回覆數(<%= @comments.count %>)
-</p>
 <div  id="comments_list" class="topic_comments">
   <ul>
     <% @comments.each do |comment| %>
@@ -56,8 +59,7 @@
     <% end %>
   </ul>
 </div>
-
-<%= simple_form_for @comment, url:comments_topic_path(@topic,comment: @comment), method: :post,remote: true, authenticity_token: true do |n| %>
+<%= simple_form_for @comment, url:comments_topic_path(@topic, edit_comment_in_topic: @comment), remote: true, method: :post do |n| %>
 <!-- url:comments_topic_path(@topic,m: @comment)後面的m: @comment是在編輯時會把帶進來的文字給一個key m
      好讓controller中的def comments 可以辨識這是新的留言還是編輯舊的留言 -->
   <div class="form-group">
