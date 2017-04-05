@@ -37,23 +37,23 @@ gem 'jbuilder', '~> 2.5'
 
 gem 'bootstrap-sass', '~> 3.3.6'
 
-gem "kaminari"
+gem "kaminari" #分頁
 
-gem 'devise'
+gem 'devise' #User
 
 gem 'simple_form'
 
-gem 'carrierwave'
+gem 'carrierwave' #photo upload
 
 gem 'omniauth-facebook'
 
-gem 'settingslogic'
+gem 'settingslogic' #FB connecting
 
 gem 'font-awesome-sass', '~> 4.7.0'
 
 gem 'animate-css-rails', '~> 3.5', '>= 3.5.1'
 
-gem 'hirb-unicode'
+gem 'hirb-unicode' #Termial table
 #type Hirb.enable in console
 
 gem 'mini_magick'

@@ -13,6 +13,8 @@
   </span>
   <p><%= comment.message %></p>
   <% if comment.pictures.any? %>
-    <p><%= image_tag "/#{comment.pictures.first}" %></p>
+    <% comment.pictures.each do |picture| %>
+      <%= image_tag picture.image.thumb.url %>
+    <% end %>
   <% end %>
 </li>

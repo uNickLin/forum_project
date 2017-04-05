@@ -4,7 +4,7 @@
 <%= link_to '', topics_path, class: "fa  fa-chevron-left btn btn-default btn-sm" %>
 <!--<%= link_to '', request.referer.present? ? request.referer : topics_path, class: "fa  fa-chevron-left btn btn-default btn-sm" %> -->
 <% if current_user && current_user.is_creator?(@topic) %>
-  <%= link_to '', edit_topic_path(@topic), class: "fa fa-pencil btn btn-primary btn-sm" %>
+  <%= link_to '', edit_topic_path(@topic, image: :picture), class: "fa fa-pencil btn btn-primary btn-sm" %>
 <!-- 如果是從其他連結進入此頁面就會返回上一頁，其他皆導回topics_path -->
 <% end %>
 
@@ -17,7 +17,11 @@
 </p>
 <p class="topic_image">
   <% if @topic.pictures.any? %>
-    <%= image_tag "/#{@topic.pictures.first}" %>
+    <% @topic.pictures.each do |picture| %>
+      <%= image_tag picture.image.thumb.url %>
+    <% end %>
+  <% else %>
+    <%= image_tag "" %>
   <% end %>
 </p>
 
@@ -35,7 +39,7 @@
 
 <hr>
 
-<p>
+<p id="comments_users">
   參與回覆者：
   <% @topic.group_by_comments_users(@topic).each do |u| %>
     <%= u %>,
@@ -60,8 +64,8 @@
     <%= n.input :message, input_html: { class: "form-control"} %>
   </div>
   <div class="comment_upload">
-    <%= n.fields_for :picture do |l| %>
-      <%= l.file_field :image %>
+    <%= n.simple_fields_for :pictures do |l| %>
+      <%= l.input :image, as: :file %>
     <% end %>
   </div>
   <%= n.submit 'Post comment', class: "btn btn-success btn-sm" %>
