@@ -13,6 +13,9 @@ class User < ApplicationRecord
   has_many :likes, :dependent => :destroy
   has_many :liked_topics, :through => :likes, :source => :topic
 
+  has_many :collections
+  has_many :collected_topics, through: :collections, source: :topic
+
   def is_creator?(topic)
     topic.user == self
 

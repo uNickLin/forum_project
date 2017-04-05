@@ -14,6 +14,9 @@ class Topic < ApplicationRecord
   has_many :pictures, dependent: :destroy
   accepts_nested_attributes_for :pictures
 
+  has_many :collections
+  has_many :collected_users, through: :collections, source: :user
+
   def group_by_comments_users
     comments_users = []
     self.comments.each do |j|
@@ -31,6 +34,13 @@ class Topic < ApplicationRecord
     find_like(user).present?
   end
 
+  def find_collection(user)
+    Colection.where( :topic_id => self.id, :user_id => user.id ).first
+  end
+
+  def is_collected_by(user)
+    find_colection(user).present?
+  end
 
 
 end

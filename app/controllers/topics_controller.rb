@@ -192,6 +192,28 @@ class TopicsController < ApplicationController
 
   end
 
+  def add_collection
+    unless @topic.is_collecteded_by(current_user)
+      Collection.create( topic: @topic, user: current_user )
+    end
+
+    respond_to do |format|
+      format.js
+      format.html { redirect_to topic_path(@topic) }
+    end
+
+  end
+
+  def remove_collection
+    collection = @topic.find_collection(current_user)
+    collection.destroy
+
+    respond_to do |format|
+      format.js {render :add_collection}
+      format.html { redirect_to topic_path(@topic) }
+    end
+
+  end
 
 
 	private

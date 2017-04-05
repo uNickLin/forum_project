@@ -28,10 +28,13 @@
 
   <hr>
 
+  <div class="collect_btn">
+    <%= render partial: "collection" %>
+  </div>
+
   <div id="like_btn">
     <%= render partial: "like" %>
   </div>
-
   <h6 id="who_likes">
     Who also like this(<%= @topic.likes.count %>) : <% @topic.liked_users.each do |like_user| %>
       <%= like_user.nickname %>,
