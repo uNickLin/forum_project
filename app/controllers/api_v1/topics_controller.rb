@@ -24,6 +24,15 @@ class ApiV1::TopicsController < ApiController
     end
   end
 
+  def update
+    @topic = Topic.find_by(id: params[:id])
+    if @topic.update(title: params[:title], content: params[:content])
+      render json: {message: 'ok!'}
+    else
+      render json: {message: 'fail!'}, status: 400
+    end
+  end
+
   # private
 
   # def topic_params
