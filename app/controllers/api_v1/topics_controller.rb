@@ -33,6 +33,15 @@ class ApiV1::TopicsController < ApiController
     end
   end
 
+  def destroy
+    @topic = Topic.find_by(id: params[:id])
+    if @topic.destroy
+      render json: {message: 'ok!'}
+    else
+      render json: {message: 'fail!'}, status: 400
+    end
+  end
+
   # private
 
   # def topic_params
