@@ -1,4 +1,3 @@
-
 <% if params[:edit_comment_in_topic] %>
   new_message = $('textarea').val();
   $('#comment-<%= @comment.id %> p').text(new_message);

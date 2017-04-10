@@ -3,8 +3,8 @@ class Topic < ApplicationRecord
 	delegate :name, :to => :category, :prefix => true, :allow_nil => true
 	delegate :email, :to => :user, :prefix => true, :allow_nil => true
 
-	belongs_to :category
-	belongs_to :user
+	belongs_to :category, optional: true
+	belongs_to :user, optional: true
 
 	has_many :comments, dependent: :destroy
 

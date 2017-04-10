@@ -25,5 +25,9 @@ Rails.application.routes.draw do
     end
   end
 
+  scope :path => '/api/v1/', :module => "api_v1", :as => 'v1', :defaults => { :format => :json } do
+    resources :topics
+  end
+
   root "topics#index"
 end

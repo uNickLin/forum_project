@@ -1,1 +1,3 @@
-  $('textarea').val($('#comment-<%= @comment.id %> p').text())
+$('textarea').val($('#comment-<%= @comment.id %> p').text());
+
+// $("#new_comment").attr("action", "/topics/<%= @topic.id %>?edit_comment_in_topic=<%= @comment.id %>");
