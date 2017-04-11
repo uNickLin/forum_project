@@ -2,7 +2,7 @@
   <h4><%= comment.user.nickname %> (<span><%= comment.user.email %></span>) </h4>
   <div class="comment_btns">
     <% if current_user && current_user.is_creator?(comment) %>
-      <%= link_to '', topic_path(edit_comment_in_topic: comment), class: "fa fa-pencil btn btn-primary btn-xs" %>
+      <%= link_to '', topic_path(edit_comment_in_topic: comment), class: "fa fa-pencil btn btn-primary btn-xs", remote: true %>
       <%= link_to '', del_comment_topic_path(del_comment_in_topic: comment), method: :delete, data: {confirm: 'Are you sure ?'}, class: "fa fa-times btn btn-danger btn-xs", remote: true %>
     <% end %>
   </div>
